@@ -1,0 +1,9 @@
+<div class="editor-campos__contenedor container m-2">
+    <form [formGroup]="formulario">
+        <div *ngFor="let campo of campos" [hidden]="esOculto(campo)">
+            <ges-editor-valor [campo]="campo" [formulario]="formulario" [editando]="editando" [validando]="validando"
+                (valorSeleccionado)="valorSeleccionado(campo, $event)">
+            </ges-editor-valor>
+        </div>
+    </form>
+</div>

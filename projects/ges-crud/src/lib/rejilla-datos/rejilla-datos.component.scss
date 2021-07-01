@@ -1,0 +1,49 @@
+table {
+  table-layout: fixed;
+}
+
+th {
+  font-size: 12pt;
+  font-weight: 600;
+  overflow: hidden;
+}
+
+td {
+  overflow: hidden;
+}
+
+.alineacion_0 {
+  text-align: left;
+}
+
+.alineacion_1 {
+  text-align: right;
+}
+
+.alineacion_2 {
+  text-align: center;
+}
+
+.orden_no {
+  width: 20px;
+  float: right;
+}
+
+.orden_descendente {
+  width: 20px;
+  float: right;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGOQAABjkBoMmE8wAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAG+SURBVDiNlZMxi1pREIW/ucqLRcAg2YDVQzEJxMZSQbIR01mkVCHN2gXyD1LnB4idRUgqQQsLcTvFIuktRNgQtREfKSKSIpg83psUrq5mzSZ7YIo7M+cMc2cGruMV4AP6h/mXsQMEjwg8BKRcLhMIBADwPI9GoyGXsQMIcBd4sOd7A1RmsxmhUAiA9XpNLBYDeAe83cv9GhSRz6oaPVAVwRizextjEBFUtQJU9vKcoKr2gJeFQoFUKgVANBrFsqydgGVZ1Go1HMcBYDgc0u12UdWeAPeNMRe2bd8bDAZmn3gMruuSz+f9yWTy3ff9xwHgh6ouV6vVC8uyyGQyNwpUq1U6nY6o6mvgo1y1I71gMPis3+9LIpE4Sp5Op+RyOXVd95OqPmUz3h0eicjPdDrtLxYLdRznmmWzWV9EfgFPtqTAnsA3wJrP56e2bZNMJg+qN5tN6vW6sBlj628t3jHGXITDYW80Gu0qj8djjUQinjHmCxC68ZOAU8AvlUo7gWKxuF3n5/8ib/FBRLTVamm73VYRUeD9/5IBTowxy1gs5sXjcc8YswRObiMAcMbVJZ7dlgyb3TgXkXM2R3cUvwGa47nOTopE2QAAAABJRU5ErkJggg==');
+  background-repeat: no-repeat;
+  background-size: 16px;
+  background-position: center;
+}
+
+.orden_ascendente {
+  width: 20px;
+  float: right;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAABjgAAAY4AXKOZhcAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjEuMWMqnEsAAAFfSURBVDhPlZGxSsNgFIXTQKOgECjq3kAdfIIMBRe3PkASyCK6+ADJ0kkfQGjIKiiOGbo5uoS+QQgIQmmGdFJnheZ6T/78MdDQ2gMf3J57z+W/qbJBHdYLQC2s3XTJUAXqnXSsqupnv99fGYaxQg1PtP6nJ346RVFE0+mUULP3KFrbdc4Utm3TcrkssSxLnnKBgU3a4+e+6bq+SpKkXpCmKfV6PZzyzjP7YrRddwwFQVCHJZPJRL7iFoNtOuVbv03TLPI8X1sAhsNhwTM/PHsmIn9iv/Pa7XaLOI5bw2A2m5GmaVgSIyOiQtcM+b7fGmzieZ485QpB6Ig/zgf+88Vi0RpqkmUZDQYDfNAvzp5gwTNDo9GIxuNxSRiGa0F4so9ZZMos35NXP2rYo+ZrUMNrmUNWOWSMBg8MzefzegFqeFWvOXvArOmeIcdxyHXdEtTwqt5W3TAFI0MSeOg1pCi/SLM5tpY/2jEAAAAASUVORK5CYII=');
+  background-repeat: no-repeat;
+  background-size: 16px;
+  background-position: center;
+}
+

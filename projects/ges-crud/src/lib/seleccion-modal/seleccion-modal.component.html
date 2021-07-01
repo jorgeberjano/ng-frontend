@@ -1,0 +1,17 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">{{ titulo }}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('x')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <ges-rejilla-datos #rejilla [columnas]="campos" [datos]="datos"
+    (filaSeleccionada)="filaSeleccionada($event)" (ordenEstablecido)="ordenEstablecido($event)">
+  </ges-rejilla-datos>
+  <ges-paginador class="seleccion__paginador" [totalItems]="totalFilas" [itemsPorPagina]="estado.paginacion.limite"
+      (pagina)="cambioPagina($event)">
+  </ges-paginador>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('')">Sin Selección</button>
+</div>

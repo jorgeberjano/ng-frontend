@@ -1,0 +1,14 @@
+<img [src]="imagen" alt="Foto de la persona">
+<!--
+<input class="btn btn-primary mr-1" type="file" id="file" name="file" (change)="onFotoModificada($event)"
+    title="Seleccionar foto" accept=".png,.jpg,.jpeg" />
+-->
+<div class="col-2"></div>
+<div class="custom-file" *ngIf="editando">
+    <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01"
+        (change)="onFotoModificada($event)"
+        accept=".png,.jpg,.jpeg"
+        title="Seleccionar un archivo de imagen"
+        lang="es">
+    <label class="custom-file-label" for="inputGroupFile01">Seleccionar imagen</label>
+</div>

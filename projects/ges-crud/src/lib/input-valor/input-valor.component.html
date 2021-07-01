@@ -1,0 +1,47 @@
+<div [ngSwitch]="tipo" class="input-group">
+
+  <input #inputTexto *ngSwitchCase="'texto'" type="textbox" class="form-control" [style.max-width]="ancho" (change)="onChangeInputTexto($event)">
+  <span *ngIf="tieneSeleccion" class="input-group-append">
+      <button type="button" class="btn btn-outline-secondary" (click)="onSeleccion()">
+        <span class="d-none">Seleccionar</span>
+        <span class="fa fa-search"></span>
+      </button>
+  </span>
+
+  <select #inputSelect *ngSwitchCase="'seleccion'" class="form-control" [style.max-width]="ancho" (change)="onChangeInputSelect($event)">
+    <option *ngFor="let opcion of opciones" [value]="opcion">{{opcion}}</option>
+  </select>
+
+  <ng-container *ngSwitchCase="'fecha'">
+    <input
+      #inputFecha="ngbDatepicker"
+      ngbDatepicker
+      [(ngModel)]="fecha"
+      class="form-control"
+      type="textbox"      
+      placeholder="dd/mm/yyyy"
+      [style.max-width]="ancho"
+      (ngModelChange)="onChangeInputFecha($event)">
+    <div class="input-group-append">
+      <button type="button" class="btn btn-outline-secondary calendar" (click)="inputFecha.toggle()"></button>
+    </div>
+  </ng-container>
+  <ng-container *ngSwitchCase="'fecha-hora'">
+    <input #inputFecha="ngbDatepicker"
+      ngbDatepicker
+      [(ngModel)]="fecha"
+      class="form-control"
+      type="textbox"
+      placeholder="dd/mm/yyyy"
+      [style.max-width]="ancho"
+      (ngModelChange)="onChangeInputFecha($event)">
+    <div class="input-group-append">
+      <button type="button" class="btn btn-outline-secondary calendar" (click)="inputFecha.toggle()"></button>
+      <ngb-timepicker
+        #inputHora
+        [(ngModel)]="hora"
+        (ngModelChange)="onChangeInputHora($event)"></ngb-timepicker>
+    </div>
+  </ng-container>
+
+</div>

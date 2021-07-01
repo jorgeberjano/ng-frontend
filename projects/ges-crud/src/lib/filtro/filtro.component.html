@@ -1,0 +1,35 @@
+<div class="container-fluid">
+  <h1>{{titulo}}</h1>
+  <div class="row m-1">
+    <button id="boton_limpiar" type="button" class="btn btn-warning m-1" (click)="onLimpiar()">
+      Limpiar filtro
+      <div class="fa fa-eraser"></div>
+    </button>
+    <div ngbDropdown class="d-inline-block">
+      <button ngbDropdownToggle id="boton_agregar" class="btn btn-primary m-1">
+        Agregar condición
+        <div class="fa fa-plus"></div>
+      </button>
+      <div ngbDropdownMenu aria-labelledby="boton_agregar">
+        <button ngbDropdownItem *ngFor="let campo of campos" (click)="onAgregarCondicion(campo)">{{campo.titulo}}</button>
+      </div>
+    </div>
+  </div>
+
+  <form>
+      <div *ngFor="let condicion of filtro.condiciones" class="row m-1">
+        <ges-filtro-condicion [condicion]="condicion" (eliminar)="onEliminarCondicion(condicion)"></ges-filtro-condicion>
+      </div>
+  </form>
+
+  <div class="row justify-content-end m-1">
+      <button id="boton_aceptar" type="button" class="btn btn-success m-1" (click)="onAceptar()">
+          Aceptar
+          <div class="fa fa-check"></div>
+      </button>            
+      <button id="boton_cancelar" type="button" class="btn btn-danger m-1" (click)="onCancelar()">
+          Cancelar
+          <div class="fa fa-times"></div>
+      </button>
+  </div>
+</div>

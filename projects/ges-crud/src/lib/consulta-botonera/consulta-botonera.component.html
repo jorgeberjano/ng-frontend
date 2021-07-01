@@ -1,0 +1,50 @@
+<button id="boton_crear" type="button" class="btn btn-success mr-1" (click)="onBotonPulsado('crear')">
+    Crear
+    <div class="fa fa-plus"></div>
+  </button>
+  <button id="boton_actualizar" type="button" class="btn btn-dark mr-1" (click)="onBotonPulsado('actualizar')">
+    Actualizar
+    <div class="fa fa-refresh"></div>
+  </button>
+  <button id="boton_filtrar" type="button" class="btn btn-primary mr-1" (click)="onBotonPulsado('filtrar')">
+    Filtrar
+    <div class="fa fa-filter"></div>
+  </button>
+  <button id="boton_configurar" type="button" class="btn btn-primary mr-1" (click)="onBotonPulsado('configurar')">
+    Configurar
+    <div class="fa fa-wrench"></div>
+  </button>
+
+  <div ngbDropdown class="d-inline-block">
+    <button ngbDropdownToggle id="boton_exportar" class="btn btn-primary mr-1">
+      Exportar
+      <div class="fa fa-download"></div>
+    </button>
+    <div ngbDropdownMenu aria-labelledby="boton_exportar">
+      <button ngbDropdownItem (click)="onBotonPulsado('exportar_pdf')">
+        <div class="fa fa-file-pdf-o"></div>
+        PDF
+      </button>
+      <button ngbDropdownItem (click)="onBotonPulsado('exportar_csv')">
+        <div class="fa fa-file-o"></div>
+        CSV
+      </button>
+      <button ngbDropdownItem (click)="onBotonPulsado('exportar_excell')">
+        <div class="fa fa-file-excel-o"></div>
+        Excell
+      </button>
+    </div>
+  </div>
+
+  <ng-container *ngIf="esSeleccion">
+    <button id="boton_sin_seleccion" type="button" class="btn btn-warning mr-1">
+      Sin selección
+      <div class="fa fa-erase"></div>
+    </button>
+    <button id="boton_cancelar" type="button" class="btn btn-danger mr-1">
+      Cancelar
+      <div class="fa fa-remove"></div>
+    </button>
+  </ng-container>
+
+

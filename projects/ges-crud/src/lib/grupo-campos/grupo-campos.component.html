@@ -1,0 +1,20 @@
+<div class="row m-1">
+  <div ngbDropdown class="d-inline-block">
+    <button ngbDropdownToggle id="boton_agregar" class="btn btn-primary m-1">
+      Agregar campo
+      <div class="fa fa-plus"></div>
+    </button>
+    <div ngbDropdownMenu aria-labelledby="boton_agregar">
+      <button ngbDropdownItem *ngFor="let campo of camposNoSeleccionados"
+        (click)="onAgregarCampo(campo)">{{campo.titulo}}</button>
+    </div>
+  </div>
+</div>
+
+<div class="grupo-campos__lista">
+  <div cdkDropList class="lista-arrastrable row" (cdkDropListDropped)="drop($event)">
+    <ges-elemento-campo cdkDrag *ngFor="let campo of campos; let i = index" class="caja-arrastrable" [campo]="campo"
+      (cambio)="cambioEnCampo(i, $event)">
+    </ges-elemento-campo>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+:host {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.mantenimiento {
+  flex-grow: 1;
+}

@@ -1,0 +1,12 @@
+<div class="app__principal">
+  <div class="app__menu">
+    <app-menu [consultas]="metadatos"></app-menu>
+  </div>
+  <div class="app__contenedor">
+    <ges-esperando *ngIf="esperando"></ges-esperando>
+    <router-outlet *ngIf="!esperando"></router-outlet>
+  </div>
+  <div class="app__pie">
+  Aplicación angular
+  </div>
+</div>

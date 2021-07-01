@@ -1,0 +1,33 @@
+@import "~bootstrap/scss/bootstrap.scss";
+
+:host {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.consulta__rejilla {
+  flex-grow: 1;
+  overflow-x: scroll;
+  overflow-y: scroll;
+}
+
+.consulta__herramientas {
+  @include make-row();
+
+  margin-left: 5;
+  display: flex;
+  flex-direction: row;
+}
+
+.consulta__herramientas__botonera {
+  flex-grow: 1;
+}
+
+.consulta__herramientas__paginador {
+  flex-grow: 0;
+  margin-right: 20;
+}
+

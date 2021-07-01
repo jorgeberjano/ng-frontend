@@ -1,0 +1,19 @@
+<div class="">
+  <table class="table table-striped table-bordered table-hover table-sm">
+    <thead class="">
+      <tr>
+        <th width="{{ getAnchoColumna(campo) }}" class="th-sm {{ getAlineacion(campo) }} fixed_header" *ngFor="let campo of columnas" (click)="onOrdenEstablecido(campo)">
+          {{ campo.titulo }}
+          <fa name="{{ getIconoOrden(campo) }}"></fa>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let fila of datos" (click)="onFilaSeleccionada(fila)">
+        <td *ngFor="let campo of columnas" class="{{ getAlineacion(campo) }}">
+          {{ getValorRepresentado(fila, campo) }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

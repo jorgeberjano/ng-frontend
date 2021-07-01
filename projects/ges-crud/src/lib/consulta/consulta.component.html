@@ -1,0 +1,20 @@
+<ges-esperando *ngIf="esperando"></ges-esperando>
+<ng-container *ngIf="consulta && !esperando">
+  <div class="consulta__titulo">
+    <h1>
+      {{ consulta.nombreEnPlural }}
+    </h1>
+  </div>
+
+  <div class="consulta__herramientas">
+    <ges-consulta-botonera class="consulta__herramientas__botonera" [esSeleccion]="esSeleccion"
+      (botonPulsado)="ejecutarAccion($event)">
+    </ges-consulta-botonera>
+    <ges-paginador class="consulta__herramientas__paginador" [totalItems]="totalFilas"
+      [itemsPorPagina]="estado.paginacion.limite" (pagina)="cambioPagina($event)">
+    </ges-paginador>
+  </div>
+  <ges-rejilla-datos class="consulta__rejilla" #rejilla [datos]="datos" [columnas]="columnas"
+    (filaSeleccionada)="filaSeleccionada($event)" (ordenEstablecido)="ordenEstablecido($event)">
+  </ges-rejilla-datos>
+</ng-container>

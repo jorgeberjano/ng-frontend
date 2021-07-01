@@ -1,0 +1,15 @@
+<ges-esperando *ngIf="esperando"></ges-esperando>
+<ng-container class="editor">
+  <h1>{{ titulo }}</h1>
+  <ges-editor-botonera [editando]="editando" [formularioValido]="editorCampos.formularioValido"
+    (botonPulsado)="ejecutarAccion($event)"></ges-editor-botonera>  
+
+  <div class="editor-persona">
+    <ges-editor-campos #editorCampos class="editor-campos" [consulta]="consulta" [editando]="editando"
+      [validando]="validando">
+    </ges-editor-campos>
+    
+    <app-editor-foto #editorFoto class="editor-foto" [editando]="editando"></app-editor-foto>
+    
+  </div>
+</ng-container>

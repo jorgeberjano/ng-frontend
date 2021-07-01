@@ -1,0 +1,17 @@
+<div class="input-group">
+    <div class="input-group-prepend">
+        <!--<div class="">{{condicion.campo.titulo}}</div>-->
+        <span class="input-group-text" id="">{{condicion.campo.titulo}}</span>
+        <!--<input [ngModel]="condicion.campo.titulo" readonly="true"/>-->
+    </div>
+    <select class="form-control" [(ngModel)]="condicion.operador">
+        <option *ngFor="let operador of operadores" [value]="operador.id">{{operador.titulo}}</option>
+    </select>
+    <!--<input class="form-control">-->
+    <ges-input-valor [(ngModel)]="condicion.valor" [tipo]="getTipo()" [opciones]="getOpciones()" tamano="10"></ges-input-valor> 
+    <div class="input-group-append">
+        <button class="form-control boton_borrar btn btn-outline-danger" type="button" (click)="onEliminar()">
+            <div class="fa fa-window-close"></div>
+        </button>
+    </div>   
+</div>

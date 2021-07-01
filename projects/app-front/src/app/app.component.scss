@@ -1,0 +1,67 @@
+.app__principal {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.app__contenedor {
+  flex-grow: 1;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.app__pie {
+  background: lightgrey;
+}
+
+
+// .contenido {
+//   flex-grow: 1 !important;
+//   overflow-y: hidden;
+//   background: #ccccff;
+//   align-content: right;
+// }
+
+// .consulta {
+//   flex-grow: 1;
+//   display: flex;
+//   flex-direction: column;
+//   background: salmon;
+//   overflow-y: hidden;
+// }
+
+// .titulo {
+//   background: yellow;
+// }
+
+// .botonera {
+//   background: moccasin;
+// }
+
+// .rejilla {
+//   flex-grow: 1 !important;
+//   background: lightblue;
+//   overflow-y: scroll;
+// }
+
+// table {
+//   background: mintcream;
+// }
+
+// .alineacion_0 {
+//   text-align: left;
+// }
+
+// .alineacion_1 {
+//   text-align: right;
+// }
+
+// .alineacion_2 {
+//   text-align: center;
+// }
+
+
