@@ -152,7 +152,7 @@ export class GesContexto {
     let valorUsuario = valorNegocio.toString();
     const opciones = this.getOpcionesCampo(campo);
     if (opciones && opciones.length > 0) {
-      if (campo.tipoDato === 'BOOLEANO') {
+      if (campo.tipoDato === 'BOOLEANO' && typeof(valorNegocio) === 'boolean') {
         valorUsuario = opciones[valorNegocio ? 1 : 0];
       } else if (campo.tipoDato === 'ENTERO' && typeof(valorNegocio) === 'number') {
         valorUsuario = valorNegocio >= 0 && valorNegocio < opciones.length ? opciones[valorNegocio] : '';

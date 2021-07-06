@@ -14,7 +14,7 @@ export class SinopticoComponent implements OnInit, AfterViewInit {
 
   public esperando = true;
   public idSinoptico: string;  
-  private myWebSocket: WebSocketSubject<any> = webSocket('ws://localhost:8080/sinoptico/visor-peso/1');
+  private myWebSocket: WebSocketSubject<any> = webSocket('ws://localhost:8081/sinoptico/visor-peso/1');
     
   constructor(
     private route: ActivatedRoute,

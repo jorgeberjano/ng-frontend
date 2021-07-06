@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class SinopticoService {
 
-    private endpoint = 'http://localhost:8080/es';
+    private endpoint = 'http://localhost:8081/es';
 
     constructor(private http: HttpClient) {
     }
