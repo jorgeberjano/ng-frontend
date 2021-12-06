@@ -18,5 +18,5 @@ export * from './lib/input-valor/input-valor.component';
 export * from './lib/paginador/paginador.component';
 export * from './lib/rejilla-datos/rejilla-datos.component';
 export * from './lib/seleccion-modal/seleccion-modal.component';
-
+export * from './lib/confirmacion-modal/confirmacion-modal.component';
 export * from './lib/ges-crud.module';

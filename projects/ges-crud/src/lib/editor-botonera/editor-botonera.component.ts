@@ -1,4 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Consulta } from '../servicios/interfaces';
+import { GesContexto } from '../servicios/ges-contexto';
 
 @Component({
   selector: 'ges-editor-botonera',
@@ -9,6 +11,7 @@ export class EditorBotoneraComponent implements OnInit {
 
   @Input() editando: boolean;
   @Input() formularioValido: boolean;
+  @Input() consulta: Consulta;
   @Output() botonPulsado: EventEmitter<string> = new EventEmitter();
 
   constructor() { }
@@ -18,5 +21,13 @@ export class EditorBotoneraComponent implements OnInit {
 
   onBotonPulsado(accion: string) {
     this.botonPulsado.next(accion);
+  }
+
+  get permitirModificar(): boolean {
+    return GesContexto.permitirModificacion(this.consulta);
+  }
+
+  get permitirBorrar(): boolean {
+    return GesContexto.permitirBaja(this.consulta);
   }
 }

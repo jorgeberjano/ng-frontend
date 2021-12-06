@@ -22,32 +22,34 @@ export class EditorValorComponent implements OnInit {
   @Input() editando: boolean;
   @Output() valorSeleccionado: EventEmitter<string> = new EventEmitter();
 
+  public oculto: boolean;
+
   constructor(private servicioGes: GesService, private modalService: NgbModal, timepickerConfig: NgbTimepickerConfig) {
     timepickerConfig.seconds = true;
     timepickerConfig.spinners = false;
   }
 
   ngOnInit() {
+    this.oculto = this.servicioGes.contexto.esOculto(this.campo);
   }
 
   get tipo(): string {
     return this.servicioGes.contexto.getTipoEditor(this.campo);
   }
 
-  // esFechaYHora(): boolean {
-  //   return this.campo.tipoDato === 'FECHA_HORA';
-  // }
-
   get opciones(): Array<string> {
     return this.servicioGes.contexto.getOpcionesCampo(this.campo);
-  }
+  }  
 
-  get oculto(): boolean {
-    return this.servicioGes.contexto.esOculto(this.campo);
-  }
-
-  get soloLectura(): boolean {
-    return this.servicioGes.contexto.esSoloLectura(this.campo);
+  get permitirEdicion(): boolean {
+    if (!this.editando || this.oculto) {
+      return false;
+    }
+    if (this.esSeleccionable) {
+      return true;
+    }
+    const soloLectura = this.servicioGes.contexto.esSoloLectura(this.campo);
+    return !soloLectura;
   }
 
   get tamanoMaximo(): number {

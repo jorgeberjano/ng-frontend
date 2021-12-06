@@ -35,16 +35,7 @@ export class AppComponent implements OnInit {
   }
 
   private reportarError(err: any): void {
-    var mensaje;
-    if (typeof err === 'string') {
-      mensaje = err;
-    }
-    if (!mensaje && err.error) {
-      mensaje = err.error.message;
-    } 
-    if (!mensaje && err.message) {
-      mensaje = err.message;
-    } 
+    const mensaje = this.servicioGes.contexto.getMensajeError(err);   
     
     this.router.navigate(['/error'], { relativeTo: this.route, state: { mensaje: mensaje } });
   }

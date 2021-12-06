@@ -3,90 +3,34 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Campo, Consulta, Paginacion, Orden, CondicionFiltro, Filtro, EstadoConsulta} from './interfaces';
 import { GesContexto } from './ges-contexto';
+import { ConfigService } from './config.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GesService {
 
-  public static readonly ROL_NORMAL = 0;
-  public static readonly ROL_ITOTAL = 1;
-  public static readonly ROL_FTOTAL = 2;
-  public static readonly ROL_GRUPO = 3;
-  public static readonly ROL_NOMBRE = 4;
-  
-  public static readonly CAMPO_NO_EDITABLE = 0x000001;
-  public static readonly CAMPO_NO_ACTUALIZABLE_EN_EDICION = 0x000002;
-  public static readonly CAMPO_SIEMPRE_MAYUSCULAS = 0x000004;
-  public static readonly CAMPO_MOSTRAR_BOTON_LUPA = 0x000008;
-  public static readonly CAMPO_REQUERIDO = 0x000010;
-  public static readonly CAMPO_SELECCION_OBLIGATORIA = 0x000020;
-  public static readonly CAMPO_CLAVE = 0x000040;
-  public static readonly CAMPO_FORMATO_CON_UNIDAD = 0x000080;
-  public static readonly CAMPO_NO_EDITABLE_EN_SUBCONSULTA = 0x000100;
-  public static readonly CAMPO_SOLO_LECTURA = 0x000200;
-  public static readonly CAMPO_SELECCION_RECOMENDABLE = 0x000400;
-  public static readonly CAMPO_IMPRIMIR_ACUMULADO = 0x000800;
-  public static readonly CAMPO_ACUMULAR_MEDIA = 0x001000;
-  public static readonly CAMPO_OCULTO = 0x002000;
-  public static readonly CAMPO_FILTRO_PREVIO_OBLIGATORIO = 0x004000;
-  public static readonly CAMPO_OCULTAR_SUBTOTALES_DE_GRUPO = 0x008000;
-  public static readonly CAMPO_SALTO_PAGINA_AL_SUBTOTALIZAR = 0x010000;
-  public static readonly CAMPO_NO_MODIFICABLE = 0x020000;
-  public static readonly CAMPO_PROPONER_VALORES = 0x040000;
-  public static readonly CAMPO_NO_NULO = 0x080000;
-  public static readonly CAMPO_NO_SUBTOTALIZAR = 0x100000;
-  public static readonly CAMPO_ORDEN_INICIAL = 0x200000;
-  public static readonly CAMPO_SOLO_FILTRO = 0x400000;
-
-  public static readonly ALINEACION_IZQUIERDA = 0;
-  public static readonly ALINEACION_DERECHA = 1;
-  public static readonly ALINEACION_CENTRO = 2;
-
   public contexto: GesContexto;
 
-  private endpoint = 'http://localhost:8080/es';
-  //private endpoint = 'http://10.234.253.188:8080/es';
-  //private endpoint = 'http://centos.shsconsultores.es:8080/es';
+  private endpoint;// = 'http://localhost:8080/es';
+
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
   };
-  //private id: number;
-//  private metadatos: any;  
-//  private mapaEstados = new Map<string, EstadoConsulta>();
 
-  constructor(private http: HttpClient) {
-    // if (!this.id) {
-    //   this.id = Math.random();
-    //   console.log("Se crea una instancia de GesService con ID: " + this.id);
-    // } else {
-    //   console.log("Se crea una instancia de GesService pero conseva su ID: " + this.id);
-    // }
+  constructor(private http: HttpClient, private configService: ConfigService) {
+    this.endpoint = configService.config["crudUrl"] + "/es";
   }
 
   public obtenerContexto(): Promise<GesContexto> {
-    // if (this.metadatos) {
-    //   return Promise.resolve(this.metadatos);
-    // }
-    //return this.http.get(this.endpoint + '/metadatos/').pipe(tap(m => this.setMetadatos(m))).toPromise();
     return this.http.get(this.endpoint + '/metadatos/').pipe(map(m => {
       const ctx = new GesContexto();
       ctx.metadatos = m;
       return ctx;
     })).toPromise();
   }
-
-  // public setMetadatos(metadatos: any) {
-  //   console.log('se establecen los metadatos en ' + GesService.id);
-  //   this.metadatos = metadatos;
-  // }
-
-  // public getMetadatos() {
-  //   return this.metadatos;
-  // }
-
   
   public obtenerEntidad(consulta: Consulta, clave: string): Promise<any> {
     return this.http.get(this.endpoint + '/entidades/' + consulta.idConsulta + '/' + clave).pipe(
@@ -112,7 +56,8 @@ export class GesService {
         url += '_sort=' + estado.orden.idCampo + '&_order=' + (estado.orden.descendente ? 'DESC' : 'ASC') + '&';
       }
       if (estado.filtro) {
-        estado.filtro.condiciones.forEach(condicion => url += this.generarParametroCondicion(condicion));
+        var i = 0;
+        estado.filtro.condiciones.forEach(condicion => url += this.generarParametroCondicion(condicion, i++));
       }
 
       if (url.endsWith('&')) {
@@ -129,13 +74,16 @@ export class GesService {
       ).toPromise();
   }
 
-  private generarParametroCondicion(condicion: CondicionFiltro): string {
+  private generarParametroCondicion(condicion: CondicionFiltro, indice: number): string {
     if (!condicion || !condicion.campo || !condicion.campo.idCampo || !condicion.valor) {
       return '';
     }
     let parametro = condicion.campo.idCampo
     if (condicion.operador) {
       parametro += '_' + condicion.operador;
+    }
+    if (indice) {
+      parametro += '~' + indice;
     }
     let valorNegocio = this.contexto.aValorNegocio(condicion.campo, condicion.valor);
     parametro += '=' + valorNegocio + '&';
@@ -165,6 +113,21 @@ export class GesService {
   public borrarEntidad(consulta: Consulta, clave: string): Promise<any> {
     const url = this.endpoint + '/entidades/' + consulta.idConsulta + '/' + clave;
     return this.http.delete<any>(url, this.httpOptions).toPromise();
+  }
+
+  public urlExportacion(formato: string, estado: EstadoConsulta): string {
+    let url = this.endpoint + '/entidades/' + estado.consulta.idConsulta + '/exportacion/' + formato + '?';
+    if (estado.orden && estado.orden.idCampo) {
+      url += '_sort=' + estado.orden.idCampo + '&_order=' + (estado.orden.descendente ? 'DESC' : 'ASC') + '&';
+    }
+    if (estado.filtro) {
+      var i = 0;
+      estado.filtro.condiciones.forEach(condicion => url += this.generarParametroCondicion(condicion, i++));
+    }
+    if (url.endsWith('&') || url.endsWith('?')) {
+      url = url.slice(0, -1);
+    } 
+    return url;   
   }
 
 }

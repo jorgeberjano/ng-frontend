@@ -24,7 +24,11 @@ export class EditorCamposComponent implements OnInit {
 
   public crearFormulario(entidad: any) {
 
-     this.campos = this.consulta.campos;
+    if (!this.servicioGes.contexto) {
+      return;
+    }
+
+    this.campos = this.consulta.campos;
 
     const grupo: any = {};  
 

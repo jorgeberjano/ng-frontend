@@ -55,22 +55,18 @@ export class InputValorComponent implements OnInit, AfterViewInit, ControlValueA
 
   onChangeInputTexto(texto: string) {
     this.value = this.inputTexto.nativeElement.value;
-    console.log('onChangeInputTexto');
   }
 
   onChangeInputSelect(evento: any) {
     this.value = this.inputSelect.nativeElement.value;
-    console.log('onChangeInputSelect');
   }
 
   onChangeInputFecha(evento: any) {
     this.actualizarValorFecha();
-    console.log('onChangeInputFecha');
   }
 
   onChangeInputHora(valor: any) {
     this.actualizarValorFecha();
-    console.log('onChangeInputHora: ' + valor);
   }
 
   /**
@@ -98,13 +94,11 @@ export class InputValorComponent implements OnInit, AfterViewInit, ControlValueA
   }
 
   get value() {
-    console.log('get value');
     return this.valorAlmacenado;
   }
 
   @Input()
   set value(valor) {
-    console.log('set value');
     this.valorAlmacenado = valor;
     this.onChange(valor);
     this.onTouched();
@@ -156,7 +150,7 @@ export class InputValorComponent implements OnInit, AfterViewInit, ControlValueA
       }
       this.fecha = this.dateParserFormatter.parse(textoFecha);
     } else {
-      console.error("No hay input")
+      // console.error("No hay input")
     }
   }
 

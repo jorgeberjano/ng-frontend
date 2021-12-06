@@ -4,7 +4,7 @@ import { EditorCamposComponent } from 'projects/ges-crud/src/lib/editor-campos/e
 import { GesService } from 'projects/ges-crud/src/lib/servicios/ges.service';
 import { Consulta } from 'projects/ges-crud/src/lib/servicios/interfaces';
 import { EditorFotoComponent } from '../editor-foto/editor-foto.component';
-import { IrisService } from '../servicios/iris.service';
+import { CustomService } from '../servicios/custom.service';
 
 @Component({
   selector: 'app-editor-persona',
@@ -27,7 +27,7 @@ export class EditorPersonaComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private servicioGes: GesService,
-    private servicioIris: IrisService) {
+    private servicioCustom: CustomService) {
   }
 
   ngOnInit() {
@@ -74,7 +74,7 @@ export class EditorPersonaComponent implements OnInit {
 
   public cargarFoto() {
 
-    this.servicioIris.obtenerFotoPersona(this.clave)
+    this.servicioCustom.obtenerFotoPersona(this.clave)
       .then(
         foto => {
           this.editorFoto.cargarImagen(foto);
@@ -87,7 +87,7 @@ export class EditorPersonaComponent implements OnInit {
     if (!this.editorFoto.modificada) {
       return;
     }
-    this.servicioIris.guardarFotoPersona(this.clave, this.editorFoto.archivo)
+    this.servicioCustom.guardarFotoPersona(this.clave, this.editorFoto.archivo)
       .then()
       .catch(err => this.reportarError(err));
   }

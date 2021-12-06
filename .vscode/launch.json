@@ -5,6 +5,7 @@
     "version": "0.2.0",
     "configurations": [
     
+    
         {
             "type": "chrome",
             "request": "launch",
@@ -19,7 +20,7 @@
             "url": "http://localhost:4200",
             "webRoot": "${workspaceFolder}/projects/app-front",
             "sourceMapPathOverrides": {
-                // "webpack:///ng://iris-front/app/*": "${workspaceFolder}/projects/iris-front/src/app/*"
+                // "webpack:///ng://app-front/app/*": "${workspaceFolder}/projects/app-front/src/app/*"
                 "webpack:///ng://ges-crud/lib/*": "${workspaceFolder}/projects/ges-crud/src/lib/*"
             },
         }

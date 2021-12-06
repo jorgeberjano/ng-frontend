@@ -11,11 +11,11 @@
 
   </ng-container>
   <ng-container *ngIf="!editando">
-    <button type="button" class="btn btn-primary m-1" (click)="onBotonPulsado('modificar')">
+    <button *ngIf="permitirModificar" type="button" class="btn btn-primary m-1" (click)="onBotonPulsado('modificar')">
       Modificar
       <div class="fa fa-edit"></div>
     </button>
-    <button type="button" class="btn btn-danger m-1" (click)="onBotonPulsado('borrar')">
+    <button *ngIf="permitirBorrar" type="button" class="btn btn-danger m-1" (click)="onBotonPulsado('borrar')">
       Borrar
       <div class="fa fa-trash"></div>
     </button>

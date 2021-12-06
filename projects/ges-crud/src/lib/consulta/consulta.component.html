@@ -7,7 +7,7 @@
   </div>
 
   <div class="consulta__herramientas">
-    <ges-consulta-botonera class="consulta__herramientas__botonera" [esSeleccion]="esSeleccion"
+    <ges-consulta-botonera class="consulta__herramientas__botonera" [esSeleccion]="esSeleccion" [consulta]="consulta"
       (botonPulsado)="ejecutarAccion($event)">
     </ges-consulta-botonera>
     <ges-paginador class="consulta__herramientas__paginador" [totalItems]="totalFilas"

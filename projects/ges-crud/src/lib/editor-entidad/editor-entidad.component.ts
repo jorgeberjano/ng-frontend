@@ -3,6 +3,8 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { GesService } from '../servicios/ges.service';
 import { EditorCamposComponent } from '../editor-campos/editor-campos.component';
 import { Consulta } from '../servicios/interfaces';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmacionModalComponent } from '../confirmacion-modal/confirmacion-modal.component';
 
 @Component({
   selector: 'ges-editor-entidad',
@@ -22,6 +24,7 @@ export class EditorEntidadComponent implements OnInit, AfterViewInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private modalService: NgbModal,
     private servicioGes: GesService) {
   }
 
@@ -70,6 +73,12 @@ export class EditorEntidadComponent implements OnInit, AfterViewInit {
   public ejecutarAccion(accion: string) {
     switch (accion) {
       case 'cancelar':
+        if (this.modificacion) {
+          this.editando = false;
+        } else {
+          this.volver();
+        }
+        break;
       case 'atras':
         this.volver();
         break;
@@ -104,6 +113,18 @@ export class EditorEntidadComponent implements OnInit, AfterViewInit {
   }
 
   private borrarEntidad() {
+    const modalRef = this.modalService.open(ConfirmacionModalComponent);
+    modalRef.componentInstance.titulo = 'Confirmación de borrado';
+    modalRef.componentInstance.mensaje = 'Se va a borrar el ' + this.consulta.nombreEnSingular;
+    modalRef.result.then(resultado => this.procesarConfirmacionBorrado(resultado));
+  }
+
+  private procesarConfirmacionBorrado(resultado: string) {
+
+    if (resultado !== 'aceptar') {
+      return;
+    }
+
     this.servicioGes.borrarEntidad(this.editorCampos.consulta, this.clave).then(
       resp => this.volver()
     ).catch(

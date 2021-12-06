@@ -21,6 +21,7 @@ export interface Campo {
     valorNulo: string;
     valorPorDefecto: string;
     opciones: Array<string>;
+    anchoColumna: number;
 }
 
 export interface Consulta {
@@ -28,6 +29,7 @@ export interface Consulta {
     nombreEnSingular: string;
     nombreEnPlural: string;
     campos: Array<Campo>;
+    estilo: number;
 }
 
 export interface Paginacion {

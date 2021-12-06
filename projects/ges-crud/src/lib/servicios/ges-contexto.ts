@@ -1,6 +1,8 @@
 import { EstadoConsulta, Consulta, Campo, CondicionFiltro, Filtro, PersonalizacionConsulta } from './interfaces';
 import { GesService } from './ges.service';
 
+// tslint:disable: no-bitwise
+
 export class GesContexto {
 
   public static readonly ROL_NORMAL = 0;
@@ -8,7 +10,7 @@ export class GesContexto {
   public static readonly ROL_FTOTAL = 2;
   public static readonly ROL_GRUPO = 3;
   public static readonly ROL_NOMBRE = 4;
-  
+
   public static readonly CAMPO_NO_EDITABLE = 0x000001;
   public static readonly CAMPO_NO_ACTUALIZABLE_EN_EDICION = 0x000002;
   public static readonly CAMPO_SIEMPRE_MAYUSCULAS = 0x000004;
@@ -37,13 +39,36 @@ export class GesContexto {
   public static readonly ALINEACION_DERECHA = 1;
   public static readonly ALINEACION_CENTRO = 2;
 
+  public static readonly CONSULTA_EDICION_ESTANDAR = 0x000001;
+  public static readonly CONSULTA_OCULTA_MENU = 0x000002;
+  public static readonly CONSULTA_OCULTA_MENU_CONS = 0x000004;
+  public static readonly CONSULTA_OCULTA_BARRA = 0x000008;
+  public static readonly CONSULTA_SIN_ALTA = 0x000010;
+  public static readonly CONSULTA_SIN_BAJA = 0x000020;
+  public static readonly CONSULTA_SIN_MODIFICACION = 0x000040;
+  public static readonly CONSULTA_SIN_COPIA = 0x000080;
+  public static readonly CONSULTA_SIN_VISUALIZACION = 0x000100;
+  public static readonly CONSULTA_SIN_CONFIGURACION = 0x000200;
+  public static readonly CONSULTA_SIN_IMPRESION = 0x000400;
+  public static readonly CONSULTA_SIN_TOTALIZACION = 0x000800;
+  public static readonly CONSULTA_SIN_IMPORTACION = 0x001000;
+  public static readonly CONSULTA_SIN_EXPORTACION = 0x002000;
+  public static readonly CONSULTA_SIN_FILTRO = 0x004000;
+  public static readonly CONSULTA_SIN_EXTRACTO = 0x008000;
+  public static readonly CONSULTA_SELECCION_MULTIPLE = 0x010000;
+  public static readonly CONSULTA_PRECEDER_SEPARADOR = 0x020000;
+  public static readonly CONSULTA_NOMBRE_FEMENINO = 0x040000;
+  public static readonly CONSULTA_EDITAR_SUBCONSULTAS = 0x080000;
+  public static readonly CONSULTA_ORDEN_AUTO_ASC = 0x100000;
+  public static readonly CONSULTA_ORDEN_AUTO_DESC = 0x200000;
+
   public metadatos: any = {};
   public mapaEstados = new Map<string, EstadoConsulta>();
   private mapaPersonalizaciones = new Map<string, PersonalizacionConsulta>();
 
 
   public setPersonalizacionConulta(idConsulta: string, personalizacion: PersonalizacionConsulta) {
-    this.mapaPersonalizaciones.set(idConsulta, personalizacion); 
+    this.mapaPersonalizaciones.set(idConsulta, personalizacion);
   }
 
   public getPersonalizacionConsulta(idConsulta: string): PersonalizacionConsulta {
@@ -58,10 +83,10 @@ export class GesContexto {
     return this.metadatos.find((consulta: Consulta) => consulta.idConsulta === idConsulta);
   }
 
-  public getCampoClave(idConsulta: string) : Campo {
+  public getCampoClave(idConsulta: string): Campo {
     const consulta = this.getConsulta(idConsulta);
     //TODO: devolver null si hay varios campos clave
-    return consulta.campos.find ((campo) => this.esClave(campo));
+    return consulta.campos.find((campo) => this.esClave(campo));
   }
 
   public esClave(campo: Campo): boolean {
@@ -69,7 +94,7 @@ export class GesContexto {
     return (campo.estilo & GesContexto.CAMPO_CLAVE) !== 0;
   }
 
-  public esNombre(campo: Campo): boolean {    
+  public esNombre(campo: Campo): boolean {
     return campo.tipoRol == 'NOMBRE';
   }
 
@@ -78,18 +103,40 @@ export class GesContexto {
     return (campo.estilo & GesContexto.CAMPO_REQUERIDO) !== 0;
   }
 
-  public esSoloLectura(campo: Campo) : boolean {
+  public esSoloLectura(campo: Campo): boolean {
     // tslint:disable-next-line: no-bitwise
     return (campo.estilo & GesContexto.CAMPO_SOLO_LECTURA) !== 0;
   }
 
-  public esOculto(campo: Campo) : boolean {
+  public esOculto(campo: Campo): boolean {
     // tslint:disable-next-line: no-bitwise
     return (campo.estilo & GesContexto.CAMPO_OCULTO) !== 0;
   }
 
   public tieneOpcionesCampo(campo: Campo): boolean {
     return campo.formato.startsWith('#');
+  }
+
+  public static permitirAlta(consulta: Consulta): boolean {
+    return !(consulta.estilo & GesContexto.CONSULTA_SIN_ALTA);
+  }
+
+  public static permitirBaja(consulta: Consulta): boolean {
+    return !(consulta.estilo & GesContexto.CONSULTA_SIN_BAJA);
+  }
+
+  public static permitirModificacion(consulta: Consulta): boolean {
+    return !(consulta.estilo & GesContexto.CONSULTA_SIN_MODIFICACION);
+  }
+
+  public static permitirFiltro(consulta: Consulta): boolean {
+    return !(consulta.estilo & GesContexto.CONSULTA_SIN_FILTRO);
+  }
+  public static permitirConfiguracion(consulta: Consulta): boolean {
+    return !(consulta.estilo & GesContexto.CONSULTA_SIN_CONFIGURACION);
+  }
+  public static permitirExportacion(consulta: Consulta): boolean {
+    return !(consulta.estilo & GesContexto.CONSULTA_SIN_EXPORTACION);
   }
 
   /**
@@ -152,9 +199,9 @@ export class GesContexto {
     let valorUsuario = valorNegocio.toString();
     const opciones = this.getOpcionesCampo(campo);
     if (opciones && opciones.length > 0) {
-      if (campo.tipoDato === 'BOOLEANO' && typeof(valorNegocio) === 'boolean') {
+      if (campo.tipoDato === 'BOOLEANO') {
         valorUsuario = opciones[valorNegocio ? 1 : 0];
-      } else if (campo.tipoDato === 'ENTERO' && typeof(valorNegocio) === 'number') {
+      } else if (campo.tipoDato === 'ENTERO' && typeof (valorNegocio) === 'number') {
         valorUsuario = valorNegocio >= 0 && valorNegocio < opciones.length ? opciones[valorNegocio] : '';
       }
     }
@@ -187,14 +234,15 @@ export class GesContexto {
       if (consulta == null) {
         return null;
       }
-      
-      const listaCampos : Array<Campo> = [];
-      if (consulta.campos) {
-        consulta.campos.forEach(c => listaCampos.push(c));
+
+      const arrayCampos: Array<Campo> = [];
+      if (consulta.campos != null) {
+        consulta.campos.forEach(c => arrayCampos.push(c));
       }
 
+
       estado = {
-        consulta: consulta, 
+        consulta: consulta,
         filtro: {
           condiciones: new Array<CondicionFiltro>()
         },
@@ -206,7 +254,7 @@ export class GesContexto {
           pagina: 0,
           limite: 10
         },
-        campos: listaCampos
+        campos: arrayCampos
       }
     }
     return estado;
@@ -221,7 +269,7 @@ export class GesContexto {
     if (estado) {
       estado.filtro = filtro;
       this.setEstadoConsulta(idConsulta, estado);
-    }    
+    }
   }
 
   public setCamposConsulta(idConsulta: string, campos: Array<Campo>) {
@@ -229,13 +277,13 @@ export class GesContexto {
     if (estado) {
       estado.campos = campos;
       this.setEstadoConsulta(idConsulta, estado);
-    }    
+    }
   }
 
-  public getCamposConsulta(idConsulta: string) : Array<Campo> {
+  public getCamposConsulta(idConsulta: string): Array<Campo> {
     const estado = this.getEstadoConsulta(idConsulta);
     return estado ? estado.campos : null;
-  }  
+  }
 
   public getEstadoSeleccion(idConsulta: string): EstadoConsulta {
     let estado = this.mapaEstados.get(idConsulta);
@@ -244,16 +292,18 @@ export class GesContexto {
       if (consulta == null) {
         return null;
       }
-      
-      const listaCampos : Array<Campo> = [];
-      consulta.campos.forEach(c => {
-        if (this.esClave(c) || this.esNombre(c)) {
-          listaCampos.push(c);
-        }
-      });      
+
+      const arrayCampos: Array<Campo> = [];
+      if (consulta.campos != null) {
+        consulta.campos.forEach(c => {
+          if (this.esClave(c) || this.esNombre(c)) {
+            arrayCampos.push(c);
+          }
+        });
+      }
 
       estado = {
-        consulta: consulta, 
+        consulta: consulta,
         filtro: {
           condiciones: new Array<CondicionFiltro>()
         },
@@ -265,7 +315,7 @@ export class GesContexto {
           pagina: 0,
           limite: 10
         },
-        campos: listaCampos
+        campos: arrayCampos
       }
     }
     return estado;
@@ -273,12 +323,14 @@ export class GesContexto {
 
   public getMensajeError(err: any): string {
     let mensaje = 'Error indefinido';
-    if (err.error) {
-      mensaje = err.error.message;
-    } else if (err.message) {
-      mensaje = err.message;
-    } else if (typeof err === 'string') {
-      mensaje = err;
+    if (err) {
+      if (typeof err === 'string') {
+        mensaje = err;
+      } else if (err.error && err.error.message) {        
+        mensaje = err.error.message;
+      } else if (err.message) {
+        mensaje = err.message;
+      }
     }
     return mensaje;
   }

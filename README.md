@@ -1,14 +1,44 @@
 # NgFrontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.1.
+Esta aplicación consta de dos proyectos:
 
-Consta de dos módulos:
-- app-front: Aplicación front-end
-- ges-crud: Libreria para mostrar CRUD simples
+- `ges-crud`: es la libreria de componentes válida para cualquier aplicación CRUD que use una API Restful que se base en la libreria Java `comun-ges-apirest`
+- `bp-front`: es la aplicación CRUD para el mantenimiento del proyecto HIRIS. Depende de la libreria `ges-crud` y personaliza algunas pantallas.
 
-## ges-crud
 
-Ejecutar `ng build ges-crud --watch` para construir la libreria ges-crud y que esté pendiente de los cambios para recompilar
+
+## Ejecución
+
+Ejecutar `ng build ges-crud --watch` para construir la libreria ges-crud y que esté pendiente de los cambios para recompilar.
+
+Luego ejecutar `ng serve` para ejecutar el servicio.
+
+
+
+## Despliegue en contenedor Docker
+
+Hay que tener instalado Docker for Windows (solo Windows 10) o Docker Toolbox (Windows 7).
+
+Hay que instalar la extensión de docker para Visual Studio:
+
+> Abrir la vista Extensiones (Ctrl + Shift + X) > buscar "Docker" para filtrar los resultados > seleccionar la extensión Docker creada por Microsoft.
+
+Configurar la url de la maquina que tiene instalado docker:
+
+> Pestaña *Docker* > ? > *Edit settings* > *Docker:Host*
+>
+
+En mi caso he puesto: `centos.shsconsultores.es:2375`
+
+No hay que poner http:// solo el nombre del host y el puerto.
+
+Para construir la imagen:
+
+> Botón derecho sobre el editor > *Command Palette* > *Docker Images: Build Image...* > poner el nombre (por defecto ngfronted:latest)
+>
+
+Esto construye la imagen, luego habrá que ejecutarla con el comando `docker run` o desde el Netbeans.
+
 
 
 ## Development server

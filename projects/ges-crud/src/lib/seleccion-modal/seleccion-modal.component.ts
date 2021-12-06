@@ -40,8 +40,8 @@ export class SeleccionModalComponent implements OnInit, OnChanges {
   }
 
   public filaSeleccionada(fila: any): void {
-    console.log(' seleccionado: ' + fila);
-    const campo = this.servicioGes.contexto.getCampoClave(this.idConsulta);
+    // console.log(' seleccionado: ' + fila);
+    // const campo = this.servicioGes.contexto.getCampoClave(this.idConsulta);
 
     this.activeModal.close(fila);
   }
@@ -73,14 +73,7 @@ export class SeleccionModalComponent implements OnInit, OnChanges {
   }
 
   private reportarError(err: any): void {
-    let mensaje = 'Error indefinido';
-    if (err.error) {
-      mensaje = err.error.message;
-    } else if (err.message) {
-      mensaje = err.message;
-    } else if (typeof err === 'string') {
-      mensaje = err;
-    }
+    let mensaje = this.servicioGes.contexto.getMensajeError(err);
     // TODO: mostrar el error
   }
 

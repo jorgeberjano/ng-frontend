@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, Renderer } from '@angular/core';
 import { Campo, Alineacion } from '../servicios/interfaces';
+import { Resizer } from './resizer';
 
 @Component({
   selector: 'ges-rejilla-datos',
@@ -13,12 +14,30 @@ export class RejillaDatosComponent implements OnInit {
   @Output() filaSeleccionada = new EventEmitter();
   @Output() ordenEstablecido = new EventEmitter();
   private orden = { idCampo: null, descendente: false };
+  private resizer: Resizer = new Resizer();
 
-  constructor() { }
+  constructor(private renderer: Renderer) { }
 
   ngOnInit() {
-    // console.log(this.columnas);
-    // console.log(this.datos);
+    // Se asignan los anchos de columna por defecto
+    this.columnas.forEach(campo => { 
+      if (campo.anchoColumna === undefined) {
+        campo.anchoColumna = campo.longitud * 10;
+      }      
+    });
+
+    this.renderer.listenGlobal('body', 'mousemove', (event) => this.resizer.mouseMove(event));
+    this.renderer.listenGlobal('body', 'mouseup', (event) => this.resizer.mouseUp(event));
+  }
+
+  public onMouseDownResizer(event: MouseEvent, campo: Campo) {
+    this.resizer.mouseDown(event, campo);
+  }
+
+  public onKeyDown(event: KeyboardEvent, fila: any) {
+    if (event.code === "Enter") {
+      this.onFilaSeleccionada(fila);
+    }
   }
 
   public onFilaSeleccionada(fila: any) {
@@ -35,11 +54,13 @@ export class RejillaDatosComponent implements OnInit {
     this.ordenEstablecido.emit(this.orden);
   }
 
-  public getAnchoColumna(campo: Campo) {
-    return campo.longitud * 10;
+  public getAnchoTabla(): number {
+    var ancho = 0;
+    this.columnas.forEach(campo => ancho += campo.anchoColumna);
+    return ancho;
   }
 
-  public getAlineacion(campo: Campo) {
+  public getAlineacion(campo: Campo): string {
     switch (campo.alineacion) {
       case Alineacion.Centro:
         return 'text-center';
@@ -61,5 +82,4 @@ export class RejillaDatosComponent implements OnInit {
   public getValorRepresentado(fila: any, campo: Campo) {
     return fila[campo.idCampo];
   }
-
 }

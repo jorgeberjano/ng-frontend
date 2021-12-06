@@ -1,15 +1,16 @@
 <div class="">
-  <table class="table table-striped table-bordered table-hover table-sm">
-    <thead class="">
+  <table class="rejilla table table-striped table-bordered table-hover table-sm">
+    <thead class="rejilla__cabecera">
       <tr>
-        <th width="{{ getAnchoColumna(campo) }}" class="th-sm {{ getAlineacion(campo) }} fixed_header" *ngFor="let campo of columnas" (click)="onOrdenEstablecido(campo)">
-          {{ campo.titulo }}
-          <fa name="{{ getIconoOrden(campo) }}"></fa>
+        <th width="{{ campo.anchoColumna }}" class="th-sm {{ getAlineacion(campo) }} fixed_header" *ngFor="let campo of columnas" >
+          <span class="rejilla__cabecera__resizer" (mousedown)="onMouseDownResizer($event, campo)"></span>
+          <span class="rejilla__cabecera__titulo" (click)="onOrdenEstablecido(campo)">{{ campo.titulo }}</span>
+          <span class="rejilla__cabecera__orden"><fa name="{{ getIconoOrden(campo) }}"></fa></span>
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let fila of datos" (click)="onFilaSeleccionada(fila)">
+      <tr tabindex="0" *ngFor="let fila of datos" (click)="onFilaSeleccionada(fila)" (keydown)="onKeyDown($event, fila)">
         <td *ngFor="let campo of columnas" class="{{ getAlineacion(campo) }}">
           {{ getValorRepresentado(fila, campo) }}
         </td>

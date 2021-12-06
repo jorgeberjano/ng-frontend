@@ -1,5 +1,44 @@
+thead tr th {
+  position: relative;
+}
+
+.rejilla__cabecera__orden {
+  display: block;
+  position: absolute;
+  top: 6px;
+  right: 12px;
+  width: 8px;
+  height: 50%;  
+}
+
+
+.rejilla__cabecera__resizer {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  width: 6px;
+  height: 100%;
+  padding: 0;
+  cursor: col-resize;
+  border: 1px solid transparent;
+  background-color: lightgray;
+}
+
+.rejilla__cabecera__titulo {
+  margin-right: 18;
+}
+
 table {
   table-layout: fixed;
+  white-space: nowrap;
+//  word-wrap: break-word;
+//  width: auto;
+}
+
+.table-hover tr:hover {
+  background-color: LightSkyBlue;
 }
 
 th {
@@ -10,19 +49,24 @@ th {
 
 td {
   overflow: hidden;
+  white-space: nowrap;
 }
 
+/*
 .alineacion_0 {
   text-align: left;
 }
 
 .alineacion_1 {
   text-align: right;
+  right: 18;
+  background-color: bisque;
 }
 
 .alineacion_2 {
   text-align: center;
 }
+*/
 
 .orden_no {
   width: 20px;

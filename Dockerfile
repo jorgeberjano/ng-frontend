@@ -18,3 +18,8 @@ FROM nginx:1.17.1-alpine
 
 # Cambiar 'app-front' por el nombre de la aplicación
 COPY --from=build-step /app/dist/app-front /usr/share/nginx/html
+
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+
+CMD ["nginx", "-g", "daemon off;"]
+

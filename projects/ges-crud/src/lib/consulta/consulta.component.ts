@@ -54,9 +54,9 @@ export class ConsultaComponent implements OnInit, OnDestroy {
     this.estado = this.servicioGes.contexto.getEstadoConsulta(this.idConsulta);
 
     this.consulta = this.servicioGes.contexto.getConsulta(this.idConsulta);
-    //this.columnas = this.consulta.listaCampos;
+    //this.columnas = this.consulta.campos;
 
-    this.columnas = this.servicioGes.contexto.getCamposConsulta(this.idConsulta);
+    this.columnas = this.servicioGes.contexto.getCamposConsulta(this.idConsulta).filter(campo => !this.servicioGes.contexto.esOculto(campo));
 
     this.cargarDatosConsulta();
   }
@@ -123,7 +123,22 @@ export class ConsultaComponent implements OnInit, OnDestroy {
       case 'configurar':
         this.guardarEstado();
         this.router.navigate(['/configuracion', this.consulta.idConsulta], { relativeTo: this.route });
+        break;
+      case 'exportar_pdf':
+        this.exportar('pdf');
+        break;
+      case 'exportar_csv':
+        this.exportar('csv');
+        break;
+      case 'exportar_excell':
+        this.exportar('xlsx');
+        break;
     }
+  }
+
+  private exportar(formato: string) {
+    const url = this.servicioGes.urlExportacion(formato, this.estado);
+    window.open(url);
   }
 
   private guardarEstado() {
@@ -132,14 +147,8 @@ export class ConsultaComponent implements OnInit, OnDestroy {
 
   private reportarError(err: any): void {
     this.esperando = false;
-    let mensaje = 'Error indefinido';
-    if (err.error) {
-      mensaje = err.error.message;
-    } else if (err.message) {
-      mensaje = err.message;
-    } else if (typeof err === 'string') {
-      mensaje = err;
-    }
+    
+    const mensaje = this.servicioGes.contexto.getMensajeError(err);
 
     this.router.navigateByUrl('/error', { state: { mensaje: mensaje } });
   }

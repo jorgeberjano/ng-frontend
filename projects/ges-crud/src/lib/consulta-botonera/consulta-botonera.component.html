@@ -1,4 +1,4 @@
-<button id="boton_crear" type="button" class="btn btn-success mr-1" (click)="onBotonPulsado('crear')">
+<button *ngIf="permitirCrear" id="boton_crear" type="button" class="btn btn-success mr-1" (click)="onBotonPulsado('crear')">
     Crear
     <div class="fa fa-plus"></div>
   </button>
@@ -6,16 +6,15 @@
     Actualizar
     <div class="fa fa-refresh"></div>
   </button>
-  <button id="boton_filtrar" type="button" class="btn btn-primary mr-1" (click)="onBotonPulsado('filtrar')">
+  <button *ngIf="permitirFiltrar" id="boton_filtrar" type="button" class="btn btn-primary mr-1" (click)="onBotonPulsado('filtrar')">
     Filtrar
     <div class="fa fa-filter"></div>
   </button>
-  <button id="boton_configurar" type="button" class="btn btn-primary mr-1" (click)="onBotonPulsado('configurar')">
+  <button *ngIf="permitirConfigurar" id="boton_configurar" type="button" class="btn btn-primary mr-1" (click)="onBotonPulsado('configurar')">
     Configurar
     <div class="fa fa-wrench"></div>
   </button>
-
-  <div ngbDropdown class="d-inline-block">
+  <div *ngIf="permitirExportar" ngbDropdown class="d-inline-block">
     <button ngbDropdownToggle id="boton_exportar" class="btn btn-primary mr-1">
       Exportar
       <div class="fa fa-download"></div>

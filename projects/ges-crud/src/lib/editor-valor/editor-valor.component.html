@@ -1,10 +1,10 @@
 <div *ngIf="campo" [formGroup]="formulario" class="form-group form-row">
   <label *ngIf="!oculto" [attr.for]="campo.idCampo" class="col-sm-2 col-form-label">{{campo.titulo}}</label>
-  <div *ngIf="!editando" class="col-sm-10">
+  <div *ngIf="!permitirEdicion" class="col-sm-10">
     <input [formControlName]="campo.idCampo" [id]="campo.idCampo" [type]="oculto ? 'hidden' : 'textbox'"
       class="form-control" readonly="true" [style.max-width]="anchoMaximo">
   </div>
-  <ng-container *ngIf="editando">
+  <ng-container *ngIf="permitirEdicion">
     <ges-input-valor class="col-sm-10" [formControlName]="campo.idCampo" [tipo]="tipo" [tamano]="tamanoMaximo"
       [ancho]="anchoMaximo" [opciones]="opciones" [tieneSeleccion]="esSeleccionable" (seleccionado)="mostrarSeleccionModal()">
     </ges-input-valor>

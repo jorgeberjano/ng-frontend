@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
@@ -19,6 +19,7 @@ import { MantenimientoComponent } from './mantenimiento/mantenimiento.component'
 import { EditorPersonaComponent } from './editor-persona/editor-persona.component';
 import { EditorFotoComponent } from './editor-foto/editor-foto.component';
 import { SinopticoComponent } from './sinoptico/sinoptico.component';
+import { ConfigService } from 'projects/ges-crud/src/lib/servicios/config.service';
 
 const appRoutes: Routes = [
   { path: 'crud/:idConsulta', component: MantenimientoComponent },
@@ -32,7 +33,19 @@ const appRoutes: Routes = [
 // { path: '**', component: PageNotFoundComponent }
 ];
 
+export const configFactory = (configService: ConfigService) => {
+  return () => configService.loadConfig();
+};
+
 @NgModule({
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: configFactory,
+      deps: [ConfigService],
+      multi: true
+    }
+   ],
   declarations: [
     AppComponent,    
     MenuComponent,
@@ -54,7 +67,7 @@ const appRoutes: Routes = [
     NgbDropdownModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule    
   ],
   
   bootstrap: [AppComponent]

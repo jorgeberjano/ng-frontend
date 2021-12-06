@@ -25,6 +25,8 @@ import { RejillaDatosComponent } from './rejilla-datos/rejilla-datos.component';
 import { SeleccionModalComponent } from './seleccion-modal/seleccion-modal.component';
 import { GesService } from './servicios/ges.service';
 import { GesServiceModule } from './servicios/ges-service.module';
+import { ConfirmacionModalComponent } from './confirmacion-modal/confirmacion-modal.component';
+import { ConfigService } from './servicios/config.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import { GesServiceModule } from './servicios/ges-service.module';
     InputValorComponent,
     PaginadorComponent,
     RejillaDatosComponent,
-    SeleccionModalComponent
+    SeleccionModalComponent,
+    ConfirmacionModalComponent
   ],
   imports: [
     GesServiceModule.forRoot(),
@@ -58,7 +61,8 @@ import { GesServiceModule } from './servicios/ges-service.module';
     DragDropModule
   ],
   entryComponents: [
-    SeleccionModalComponent
+    SeleccionModalComponent,
+    ConfirmacionModalComponent
   ],
   exports: [
     ConfiguracionCamposComponent,
@@ -77,10 +81,12 @@ import { GesServiceModule } from './servicios/ges-service.module';
     InputValorComponent,
     PaginadorComponent,
     RejillaDatosComponent,
-    SeleccionModalComponent
+    SeleccionModalComponent,
+    ConfirmacionModalComponent
   ],
   providers: [
-    GesService
+    GesService,
+    ConfigService
   ]
 })
 export class GesCrudModule {  
