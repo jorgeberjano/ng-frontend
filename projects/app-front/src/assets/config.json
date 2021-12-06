@@ -1,0 +1,4 @@
+{
+    "crudUrl": "http://localhost:8080",
+    "sinopticosUrl": "http://localhost:8081"
+}
