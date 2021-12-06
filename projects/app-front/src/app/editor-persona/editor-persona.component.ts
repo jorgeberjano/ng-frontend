@@ -3,8 +3,8 @@ import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { EditorCamposComponent } from 'projects/ges-crud/src/lib/editor-campos/editor-campos.component';
 import { GesService } from 'projects/ges-crud/src/lib/servicios/ges.service';
 import { Consulta } from 'projects/ges-crud/src/lib/servicios/interfaces';
-import { EditorFotoComponent } from '../editor-foto/editor-foto.component';
-import { CustomService } from '../servicios/custom.service';
+import { EditorFotoComponent } from 'projects/app-front/src/app/editor-foto/editor-foto.component';
+import { CustomService } from 'projects/app-front/src/app/servicios/custom.service';
 
 @Component({
   selector: 'app-editor-persona',
