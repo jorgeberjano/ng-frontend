@@ -10,11 +10,14 @@ COPY package.json /app
 RUN npm install
 
 COPY . /app
+#COPY ../config.json /app/projects/app-front/src/assets/.
+
+RUN npm run build ges-crud
 
 RUN npm run build --prod
 
 # Segunda Etapa
-FROM nginx:1.17.1-alpine
+FROM nginx:1.17.1-alpine as app-front-nginx
 
 # Cambiar 'app-front' por el nombre de la aplicación
 COPY --from=build-step /app/dist/app-front /usr/share/nginx/html

@@ -11,11 +11,11 @@ import { ConfigService } from 'projects/ges-crud/src/lib/servicios/config.servic
 })
 export class SinopticoService {
 
-    private endpoint;// = 'http://localhost:8081/es';
+    private endpoint: string = 'http://localhost:8081/es';
 
     constructor(private http: HttpClient,
         private configService: ConfigService) {
-        this.endpoint = configService.config["sinopticosUrl"] + "/es";
+        //this.endpoint = configService.config["sinopticosUrl"] + "/es";
     }
 
     public obtenerSinoptico(id: string): Promise<string> {

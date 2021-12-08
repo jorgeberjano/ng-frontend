@@ -10,7 +10,7 @@ import { ConfigService } from 'projects/ges-crud/src/lib/servicios/config.servic
 })
 export class CustomService {
 
-    private endpoint;// = 'http://localhost:8080/es';
+    private endpoint: string;// = 'http://localhost:8080/es';
 
     constructor(private http: HttpClient,
         private configService: ConfigService) {

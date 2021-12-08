@@ -12,7 +12,7 @@ export class GesService {
 
   public contexto: GesContexto;
 
-  private endpoint;// = 'http://localhost:8080/es';
+  private endpoint: string = 'http://localhost:8080/es';
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -21,7 +21,7 @@ export class GesService {
   };
 
   constructor(private http: HttpClient, private configService: ConfigService) {
-    this.endpoint = configService.config["crudUrl"] + "/es";
+    //this.endpoint = configService.config["crudUrl"] + "/es";
   }
 
   public obtenerContexto(): Promise<GesContexto> {

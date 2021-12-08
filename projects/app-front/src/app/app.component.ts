@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MenuComponent } from './menu/menu.component';
 import { GesService } from 'projects/ges-crud/src/lib/servicios/ges.service';
-
+import { ConfigService } from 'projects/ges-crud/src/lib/servicios/config.service';
 
 @Component({
   selector: 'app-root',
@@ -17,10 +17,13 @@ export class AppComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private servicioGes: GesService) {
+    private servicioGes: GesService,
+    private configService: ConfigService) {
   }
 
   ngOnInit() {
+    this.configService.loadConfig();
+
     this.servicioGes.obtenerContexto()
       .then(ctx => {
         this.esperando = false;

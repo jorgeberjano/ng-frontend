@@ -15,7 +15,7 @@ export class ConfigService {
     public config: Config;
 
     constructor(private http: HttpClient) { 
-        this.loadConfig()
+        //this.loadConfig()
     }
 
     loadConfig() {
@@ -24,6 +24,7 @@ export class ConfigService {
             .toPromise()
             .then(config => {
                 this.config = config;
+                console.log ("Se ha cargado config.json: ", config);
             });
     }
 
