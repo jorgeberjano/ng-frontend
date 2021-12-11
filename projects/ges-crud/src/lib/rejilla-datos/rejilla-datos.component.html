@@ -2,7 +2,7 @@
   <table class="rejilla table table-striped table-bordered table-hover table-sm">
     <thead class="rejilla__cabecera">
       <tr>
-        <th width="{{ campo.anchoColumna }}" class="th-sm {{ getAlineacion(campo) }} fixed_header" *ngFor="let campo of columnas" >
+        <th width="{{ campo.longitud * 10 }}" class="th-sm {{ getAlineacion(campo) }} fixed_header" *ngFor="let campo of columnas" >
           <span class="rejilla__cabecera__resizer" (mousedown)="onMouseDownResizer($event, campo)"></span>
           <span class="rejilla__cabecera__titulo" (click)="onOrdenEstablecido(campo)">{{ campo.titulo }}</span>
           <span class="rejilla__cabecera__orden">

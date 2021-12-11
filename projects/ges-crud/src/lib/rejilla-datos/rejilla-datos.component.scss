@@ -34,11 +34,12 @@ table {
   table-layout: fixed;
   white-space: nowrap;
   overflow-x: scroll;
+  table-layout: fixed;
 //  word-wrap: break-word;
 //  width: auto;
 }
 
-.table-hover tr:hover {
+.table-hover tbody tr:hover {
   background-color: LightSkyBlue;
 }
 

@@ -21,7 +21,6 @@ export interface Campo {
     valorNulo: string;
     valorPorDefecto: string;
     opciones: Array<string>;
-    anchoColumna: number;
 }
 
 export interface Consulta {

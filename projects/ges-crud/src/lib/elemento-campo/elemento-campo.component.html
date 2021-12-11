@@ -1,6 +1,7 @@
-<div>
-  {{campo.titulo}}  
+<div class="titulo">
+  {{campo.titulo}}
 </div>
-<button type="button" class="boton_eliminar btn btn-navegacion float-right" (click)="eliminar()">
-  <div class="fa fa-remove"></div>
+<input #inputAncho type="textbox" class="form-control" [style.max-width]="60" (change)="onChangeAncho($event)">
+<button type="button" class="boton_eliminar btn btn-navegacion" (click)="eliminar()">
+  <fa-icon [icon]="faTrash"></fa-icon>
 </button>

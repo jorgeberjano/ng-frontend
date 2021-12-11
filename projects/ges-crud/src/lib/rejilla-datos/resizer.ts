@@ -11,7 +11,7 @@ export class Resizer {
     this.campo = campo;
     this.pressed = true;
     this.startX = event.x;
-    this.startWidth = campo.anchoColumna;
+    this.startWidth = campo.longitud * 10;
     //console.log("Down");
   }
   public mouseMove(event: MouseEvent): void {
@@ -23,7 +23,7 @@ export class Resizer {
       }
       let width = this.startWidth + (event.x - this.startX);
       if (width > 0) {
-        this.campo.anchoColumna = width;
+        this.campo.longitud = width / 10;
       }
       //console.log("Move");
     }
