@@ -2,26 +2,26 @@
   <ng-container *ngIf="editando">
     <button type="button" class="btn btn-success m-1" (click)="onBotonPulsado('guardar')" [disabled]="!formularioValido">
       Guardar
-      <div class="fa fa-save"></div>
+      <fa-icon [icon]="faSave"></fa-icon>
     </button>
     <button type="button" class="btn btn-danger m-1" (click)="onBotonPulsado('cancelar')">
       Cancelar
-      <div class="fa fa-remove"></div>
+      <fa-icon [icon]="faTimes"></fa-icon>
     </button>
 
   </ng-container>
   <ng-container *ngIf="!editando">
     <button *ngIf="permitirModificar" type="button" class="btn btn-primary m-1" (click)="onBotonPulsado('modificar')">
       Modificar
-      <div class="fa fa-edit"></div>
+      <fa-icon [icon]="faEdit"></fa-icon>
     </button>
     <button *ngIf="permitirBorrar" type="button" class="btn btn-danger m-1" (click)="onBotonPulsado('borrar')">
       Borrar
-      <div class="fa fa-trash"></div>
+      <fa-icon [icon]="faTrash"></fa-icon>     
     </button>
     <button type="button" class="btn btn-dark m-1" (click)="onBotonPulsado('atras')">
       Atrás
-      <div class="fa fa-sign-out"></div>
+      <fa-icon [icon]="faSignOutAlt"></fa-icon> 
     </button>
   </ng-container>
 </div>

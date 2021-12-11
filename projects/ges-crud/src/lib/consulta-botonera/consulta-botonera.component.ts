@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Consulta } from '../servicios/interfaces';
 import { GesContexto } from '../servicios/ges-contexto';
+import { faRecycle, faPlus, faFilter, faWrench, faDownload, faFilePdf, faFileCsv, faFileExcel, faEraser, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'ges-consulta-botonera',
@@ -12,6 +13,17 @@ export class ConsultaBotoneraComponent implements OnInit {
   @Input() esSeleccion: boolean;
   @Input() consulta: Consulta;
   @Output() botonPulsado: EventEmitter<string> = new EventEmitter();
+
+  faRecycle = faRecycle;
+  faPlus = faPlus;
+  faFilter =faFilter;
+  faWrench = faWrench;
+  faDownload = faDownload;
+  faFilePdf = faFilePdf;
+  faFileCsv = faFileCsv;
+  faFileExcel = faFileExcel;
+  faEraser = faEraser;
+  faTimes = faTimes;
 
   constructor() { }
 

@@ -33,6 +33,7 @@ thead tr th {
 table {
   table-layout: fixed;
   white-space: nowrap;
+  overflow-x: scroll;
 //  word-wrap: break-word;
 //  width: auto;
 }
@@ -40,6 +41,12 @@ table {
 .table-hover tr:hover {
   background-color: LightSkyBlue;
 }
+
+/*
+.table-hover tr:first-child:hover {
+  background-color: red;
+}
+*/
 
 th {
   font-size: 12pt;

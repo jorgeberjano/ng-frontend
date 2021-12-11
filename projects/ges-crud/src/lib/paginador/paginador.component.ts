@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { faFastBackward, faStepBackward, faStepForward, faFastForward } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'ges-paginador',
@@ -11,6 +12,11 @@ export class PaginadorComponent implements OnInit {
   @Input() itemsPorPagina: number;
   public paginaActual = 0;
   @Output() pagina: EventEmitter<number> = new EventEmitter();
+
+  faFastBackward = faFastBackward;
+  faStepBackward = faStepBackward;
+  faStepForward = faStepForward;
+  faFastForward = faFastForward;
 
   constructor() { }
 

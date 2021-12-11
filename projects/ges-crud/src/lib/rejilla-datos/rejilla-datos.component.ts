@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, Renderer } from '@angular/core';
 import { Campo, Alineacion } from '../servicios/interfaces';
 import { Resizer } from './resizer';
+import { faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'ges-rejilla-datos',
@@ -15,6 +16,9 @@ export class RejillaDatosComponent implements OnInit {
   @Output() ordenEstablecido = new EventEmitter();
   private orden = { idCampo: null, descendente: false };
   private resizer: Resizer = new Resizer();
+
+  faSortUp = faSortUp;
+  faSortDown = faSortDown;
 
   constructor(private renderer: Renderer) { }
 
@@ -73,9 +77,9 @@ export class RejillaDatosComponent implements OnInit {
 
   public getIconoOrden(campo: Campo) {
     if (campo.idCampo === this.orden.idCampo) {
-      return this.orden.descendente ? 'sort-up' : 'sort-down';
+      return this.orden.descendente ? faSortUp : faSortDown;
     } else {
-      return 'icon-sign-blank';
+      return null;
     }
   }
 

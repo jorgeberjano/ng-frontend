@@ -3,7 +3,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { ConfiguracionCamposComponent } from './configuracion-campos/configuracion-campos.component';
@@ -52,7 +52,7 @@ import { ConfigService } from './servicios/config.service';
   imports: [
     GesServiceModule.forRoot(),
     BrowserModule,
-    AngularFontAwesomeModule,
+    FontAwesomeModule,
     NgbModule,
     NgbDropdownModule,
     HttpClientModule,

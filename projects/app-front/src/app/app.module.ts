@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -63,7 +62,6 @@ export const configFactory = (configService: ConfigService) => {
       { enableTracing: false } // <-- debugging purposes only
     ),
     BrowserModule,
-    AngularFontAwesomeModule,
     FontAwesomeModule,
     NgbModule,
     NgbDropdownModule,

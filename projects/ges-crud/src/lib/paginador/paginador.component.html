@@ -6,23 +6,23 @@
             </a>
         </li>
         <li class="page-item">
-            <a class="page-link" aria-label="Primera página" (click)="onCambioPagina('primera')" href="javascript: onCambioPagina('primera');">
-                <span class="fa fa-fast-backward"></span>
+            <a class="page-link" aria-label="Primera página" (click)="onCambioPagina('primera')" tabindex="0">
+                <fa-icon [icon]="faFastBackward"></fa-icon>
             </a>
         </li>
         <li class="page-item">
-            <a class="page-link" aria-label="Página anterior" (click)="onCambioPagina('anterior')" tabindex="0" href="javascript: onCambioPagina('anterior');">
-                <span class="fa fa-step-backward"></span>
+            <a class="page-link" aria-label="Página anterior" (click)="onCambioPagina('anterior')" tabindex="0">
+                <fa-icon [icon]="faStepBackward"></fa-icon>
             </a>
         </li>
         <li class="page-item">
-            <a class="page-link" aria-label="Página siguiente" (click)="onCambioPagina('siguiente')"  href="javascript: onCambioPagina('siguiente');">
-                <span class="fa fa-step-forward"></span>
+            <a class="page-link" aria-label="Página siguiente" (click)="onCambioPagina('siguiente')" tabindex="0">
+                <fa-icon [icon]="faStepForward"></fa-icon>
             </a>
         </li>
         <li class="page-item">
-            <a class="page-link" aria-label="Última página" (click)="onCambioPagina('ultima')"  href="javascript: onCambioPagina('ultima');">
-                <span class="fa fa-fast-forward"></span>
+            <a class="page-link" aria-label="Última página" (click)="onCambioPagina('ultima')" tabindex="0">
+                <fa-icon [icon]="faFastForward"></fa-icon>
             </a>
         </li>
     </ul>

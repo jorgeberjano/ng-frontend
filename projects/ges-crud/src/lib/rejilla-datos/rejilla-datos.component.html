@@ -5,7 +5,10 @@
         <th width="{{ campo.anchoColumna }}" class="th-sm {{ getAlineacion(campo) }} fixed_header" *ngFor="let campo of columnas" >
           <span class="rejilla__cabecera__resizer" (mousedown)="onMouseDownResizer($event, campo)"></span>
           <span class="rejilla__cabecera__titulo" (click)="onOrdenEstablecido(campo)">{{ campo.titulo }}</span>
-          <span class="rejilla__cabecera__orden"><fa name="{{ getIconoOrden(campo) }}"></fa></span>
+          <span class="rejilla__cabecera__orden">
+            <!--<fa-icon [icon]="{{ getIconoOrden(campo) }}"></fa-icon>-->
+            <!--<fa name="{{ getIconoOrden(campo) }}"></fa>-->
+          </span>
         </th>
       </tr>
     </thead>

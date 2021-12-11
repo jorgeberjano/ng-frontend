@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { Consulta } from '../servicios/interfaces';
 import { GesContexto } from '../servicios/ges-contexto';
+import { faSave, faTimes, faEdit, faTrash, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'ges-editor-botonera',
@@ -13,6 +14,12 @@ export class EditorBotoneraComponent implements OnInit {
   @Input() formularioValido: boolean;
   @Input() consulta: Consulta;
   @Output() botonPulsado: EventEmitter<string> = new EventEmitter();
+
+  faSave = faSave;
+  faTimes = faTimes;
+  faEdit = faEdit;
+  faTrash = faTrash;
+  faSignOutAlt = faSignOutAlt;
 
   constructor() { }
 

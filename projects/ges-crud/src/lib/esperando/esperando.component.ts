@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'ges-esperando',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EsperandoComponent implements OnInit {
 
+  faSpinner = faSpinner;
+
   constructor() { }
 
   ngOnInit() {
   }
-
 }
