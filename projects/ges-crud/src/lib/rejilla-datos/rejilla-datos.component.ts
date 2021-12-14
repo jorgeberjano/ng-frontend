@@ -23,12 +23,6 @@ export class RejillaDatosComponent implements OnInit {
   constructor(private renderer: Renderer) { }
 
   ngOnInit() {
-    // Se asignan los anchos de columna por defecto
-    // this.columnas.forEach(campo => { 
-    //   if (campo.anchoColumna === undefined) {
-    //     campo.anchoColumna = campo.longitud * 10;
-    //   }      
-    // });
 
     this.renderer.listenGlobal('body', 'mousemove', (event) => this.resizer.mouseMove(event));
     this.renderer.listenGlobal('body', 'mouseup', (event) => this.resizer.mouseUp(event));

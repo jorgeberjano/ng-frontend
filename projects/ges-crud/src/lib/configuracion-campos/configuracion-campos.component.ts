@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { GesService } from '../servicios/ges.service';
 import { Consulta, Campo } from '../servicios/interfaces';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import { faTimes, faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'ges-configuracion-campos',
@@ -16,6 +17,10 @@ export class ConfiguracionCamposComponent implements OnInit {
   private idConsulta: string;
   public camposDisponibles: Array<Campo>;
   public camposNoSeleccionados: Array<Campo>;
+
+  faTimes = faTimes;
+  faCheck = faCheck;
+  faPlus = faPlus;
 
   constructor(
     private route: ActivatedRoute,
