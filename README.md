@@ -39,6 +39,9 @@ Para construir la imagen:
 
 Esto construye la imagen, luego habrá que ejecutarla con el comando `docker run` o desde el Netbeans.
 
+## Crear un componente en uno de los proyectos
+
+ng g s auth-interceptor --project ges-crud
 
 
 ## Development server

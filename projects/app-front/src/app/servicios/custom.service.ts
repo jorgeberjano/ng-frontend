@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ConfigService } from 'projects/ges-crud/src/lib/servicios/config.service';
 
 /**
  * Servicio para integración con una hipotetica API personalizada
@@ -12,9 +11,8 @@ export class CustomService {
 
     private endpoint: string;// = 'http://localhost:8080/es';
 
-    constructor(private http: HttpClient,
-        private configService: ConfigService) {
-        this.endpoint = configService.config["customUrl"] + "/es";
+    constructor(private http: HttpClient) {
+        this.endpoint = localStorage.getItem("customUrl") + "/es";
     }
 
     public obtenerFotoPersona(id: string): Promise<Blob> {

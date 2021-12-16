@@ -108,7 +108,7 @@ export class ConsultaComponent implements OnInit, OnDestroy {
   }
 
   public ejecutarAccion(accion: string) {
-    console.log(accion);
+    //console.log(accion);
     switch (accion) {
       case 'crear':
         this.router.navigate(['/creacion', this.consulta.idConsulta], { relativeTo: this.route });

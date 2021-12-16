@@ -11,7 +11,8 @@ import { ConfigService } from 'projects/ges-crud/src/lib/servicios/config.servic
 })
 export class AppComponent implements OnInit {
   title = 'ng-crud';
-  @Input() esperando = true;
+  @Input() esperando = true;  
+  @Input() seDebeMostrarLogin = true;
   metadatos: Array<object>;
 
   constructor(
@@ -24,6 +25,10 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.configService.loadConfig();
 
+    if (localStorage.getItem('token')) {
+      this.seDebeMostrarLogin = false;
+    }
+
     this.servicioGes.obtenerContexto()
       .then(ctx => {
         this.esperando = false;
@@ -35,6 +40,11 @@ export class AppComponent implements OnInit {
         this.esperando = false;
         this.reportarError(e)
       });
+  }
+
+  public loginRealizado(usuario: string) {
+    console.log("Se ha logado el usuario: " + usuario);
+    this.seDebeMostrarLogin = false;
   }
 
   private reportarError(err: any): void {

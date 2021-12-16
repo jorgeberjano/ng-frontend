@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 export interface Config {
-    //crudUrl: string;
+    crudUrl: string;
 }
 
 /**
@@ -12,10 +12,8 @@ export interface Config {
     providedIn: 'root'
 })
 export class ConfigService {
-    public config: Config;
 
     constructor(private http: HttpClient) { 
-        //this.loadConfig()
     }
 
     loadConfig() {
@@ -23,14 +21,8 @@ export class ConfigService {
             .get<Config>('./assets/config.json')
             .toPromise()
             .then(config => {
-                this.config = config;
+                localStorage.setItem('crudUrl', config.crudUrl);
                 console.log ("Se ha cargado config.json: ", config);
             });
     }
-
-    // async loadConfig() {
-    //     this.config = await this.http
-    //         .get<Config>('./assets/config.json')
-    //         .toPromise();
-    // }
 }

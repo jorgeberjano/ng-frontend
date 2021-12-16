@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Campo, Consulta, Paginacion, Orden, CondicionFiltro, Filtro, EstadoConsulta} from './interfaces';
 import { GesContexto } from './ges-contexto';
-import { ConfigService } from './config.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +11,7 @@ export class GesService {
 
   public contexto: GesContexto;
 
-  private endpoint: string = 'http://localhost:8080/es';
+  private endpoint: string;// = 'http://localhost:8080/es';
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -20,9 +19,17 @@ export class GesService {
     })
   };
 
-  constructor(private http: HttpClient, private configService: ConfigService) {
+  constructor(private http: HttpClient) {
     //this.endpoint = configService.config["crudUrl"] + "/es";
+    this.endpoint = localStorage.getItem("crudUrl") + "/es";
+    console.log("Constructor: crudUrl = ${this.endpoint}");
   }
+
+  // ngOnInit() {
+  //   this.endpoint = this.configService.config["crudUrl"] + "/es";
+  //   console.log("ngOnInit crudUrl = ${this.endpoint}");
+
+  // }
 
   public obtenerContexto(): Promise<GesContexto> {
     return this.http.get(this.endpoint + '/metadatos/').pipe(map(m => {

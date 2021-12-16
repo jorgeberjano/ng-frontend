@@ -1,10 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+
+import { AuthInterceptorService } from './servicios/auth-interceptor.service';
 
 import { ConfiguracionCamposComponent } from './configuracion-campos/configuracion-campos.component';
 import { ConsultaComponent } from './consulta/consulta.component';
@@ -27,6 +29,7 @@ import { GesService } from './servicios/ges.service';
 import { GesServiceModule } from './servicios/ges-service.module';
 import { ConfirmacionModalComponent } from './confirmacion-modal/confirmacion-modal.component';
 import { ConfigService } from './servicios/config.service';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +50,8 @@ import { ConfigService } from './servicios/config.service';
     PaginadorComponent,
     RejillaDatosComponent,
     SeleccionModalComponent,
-    ConfirmacionModalComponent
+    ConfirmacionModalComponent,
+    LoginComponent
   ],
   imports: [
     GesServiceModule.forRoot(),
@@ -86,7 +90,12 @@ import { ConfigService } from './servicios/config.service';
   ],
   providers: [
     GesService,
-    ConfigService
+    ConfigService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
   ]
 })
 export class GesCrudModule {  

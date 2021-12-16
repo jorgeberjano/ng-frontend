@@ -1,4 +1,7 @@
-<div class="app__principal">
+
+<ges-login (loginCompletado)="loginRealizado($event)" *ngIf="seDebeMostrarLogin"></ges-login>
+
+<div class="app__principal" *ngIf="!seDebeMostrarLogin">
   <div class="app__menu">
     <app-menu [consultas]="metadatos"></app-menu>
   </div>

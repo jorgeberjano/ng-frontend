@@ -63,3 +63,10 @@ export interface EstadoConsulta {
 export interface PersonalizacionConsulta {
     rutaEdicion: string;
 }
+
+export interface Usuario {
+    nombre: string;
+    contrasena: string;
+}
+
+

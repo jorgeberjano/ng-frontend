@@ -20,6 +20,7 @@ import { EditorPersonaComponent } from './editor-persona/editor-persona.componen
 import { EditorFotoComponent } from './editor-foto/editor-foto.component';
 import { SinopticoComponent } from './sinoptico/sinoptico.component';
 import { ConfigService } from 'projects/ges-crud/src/lib/servicios/config.service';
+import { LoginComponent } from 'projects/ges-crud/src/lib/login/login.component';
 
 const appRoutes: Routes = [
   { path: 'crud/:idConsulta', component: MantenimientoComponent },
@@ -52,7 +53,8 @@ export const configFactory = (configService: ConfigService) => {
     MantenimientoComponent,
     EditorPersonaComponent,
     EditorFotoComponent,
-    SinopticoComponent
+    SinopticoComponent,
+    LoginComponent
   ],
   imports: [
     GesCrudModule,
