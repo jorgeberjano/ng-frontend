@@ -11,8 +11,7 @@ import { ConfigService } from 'projects/ges-crud/src/lib/servicios/config.servic
 })
 export class AppComponent implements OnInit {
   title = 'ng-crud';
-  @Input() esperando = true;  
-  @Input() seDebeMostrarLogin = true;
+  @Input() estado: string = 'esperando';    
   metadatos: Array<object>;
 
   constructor(
@@ -25,29 +24,38 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.configService.loadConfig();
 
-    if (localStorage.getItem('token')) {
-      this.seDebeMostrarLogin = false;
+    if (!localStorage.getItem('token')) {
+      this.estado = 'login';
+    } else {
+      this.obtenerContexto();
     }
+  }
 
+  private obtenerContexto() {
     this.servicioGes.obtenerContexto()
       .then(ctx => {
-        this.esperando = false;
+        this.estado = 'menu';
         ctx.setPersonalizacionConulta('personas', { rutaEdicion: '/edicion_persona' });
         this.servicioGes.contexto = ctx;
         this.metadatos = ctx.metadatos;
       })
       .catch(e => {
-        this.esperando = false;
+        this.estado = 'menu';
         this.reportarError(e)
       });
   }
 
-  public loginRealizado(usuario: string) {
-    console.log("Se ha logado el usuario: " + usuario);
-    this.seDebeMostrarLogin = false;
+  public esperandoLogin() {
+    this.estado = 'esperando'
   }
 
-  private reportarError(err: any): void {
+  public loginRealizado(usuario: string) {
+    console.log('Se ha logado el usuario: ' + usuario);
+    this.estado = 'esperando';
+    this.obtenerContexto();
+  }
+
+  public reportarError(err: any): void {
     const mensaje = this.servicioGes.contexto.getMensajeError(err);   
     
     this.router.navigate(['/error'], { relativeTo: this.route, state: { mensaje: mensaje } });
