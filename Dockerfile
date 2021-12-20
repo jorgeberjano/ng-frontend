@@ -10,7 +10,6 @@ COPY package.json /app
 RUN npm install
 
 COPY . /app
-COPY config.json /app/projects/app-front/src/assets/.
 
 RUN npm run build ges-crud
 

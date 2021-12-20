@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MenuComponent } from './menu/menu.component';
 import { GesService } from 'projects/ges-crud/src/lib/servicios/ges.service';
 import { ConfigService } from 'projects/ges-crud/src/lib/servicios/config.service';
+import { LoginService } from 'projects/ges-crud/src/lib/servicios/login.service';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ export class AppComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private servicioGes: GesService,
+    private servicioLogin: LoginService,
     private configService: ConfigService) {
   }
 
@@ -50,6 +52,7 @@ export class AppComponent implements OnInit {
   }
 
   public loginRealizado(usuario: string) {
+
     console.log('Se ha logado el usuario: ' + usuario);
     this.estado = 'esperando';
     this.obtenerContexto();
