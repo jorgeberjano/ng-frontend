@@ -60,6 +60,10 @@ export class EditorValorComponent implements OnInit {
     return this.campo.longitud * 20 + 'px';
   }
 
+  get unidad(): string {
+    return this.campo.unidad;
+  }
+
   get esSeleccionable(): boolean {
     return this.campo.consultaSeleccion ? true : false;
   }
@@ -85,7 +89,7 @@ export class EditorValorComponent implements OnInit {
   }
 
   seleccionarValor(entidadSeleccionada: any) {
-    const valor = entidadSeleccionada[this.campo.idCampoSeleccion];
+    const valor = entidadSeleccionada ? entidadSeleccionada[this.campo.idCampoSeleccion] : '';
     this.formulario.controls[this.campo.idCampo].setValue(valor);
     this.valorSeleccionado.next(entidadSeleccionada);
   }

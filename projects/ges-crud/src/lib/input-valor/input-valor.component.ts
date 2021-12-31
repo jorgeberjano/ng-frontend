@@ -29,8 +29,9 @@ export class InputValorComponent implements OnInit, AfterViewInit, ControlValueA
   @Input() tipo: string;
   @Input() tamano: number;
   @Input() ancho: string;
+  @Input() unidad: string;
   @Input() opciones: Array<string>;
-  @Input() tieneSeleccion: false;
+  @Input() tieneSeleccion: boolean;  
   @Output() seleccionado: EventEmitter<void> = new EventEmitter();
   public fecha: any;
   public hora: any;

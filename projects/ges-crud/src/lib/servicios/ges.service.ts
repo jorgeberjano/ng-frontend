@@ -3,16 +3,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Campo, Consulta, Paginacion, Orden, CondicionFiltro, Filtro, EstadoConsulta} from './interfaces';
 import { GesContexto } from './ges-contexto';
+import { combineLatest, Observable, zip } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GesService {
-
+  
   public contexto: GesContexto;
 
-  private endpoint: string;// = 'http://localhost:8080/es';
-
+  private endpoint: string;
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -20,23 +20,33 @@ export class GesService {
   };
 
   constructor(private http: HttpClient) {
-    //this.endpoint = configService.config["crudUrl"] + "/es";
-    this.endpoint = localStorage.getItem("crudUrl") + "/es";
+    this.endpoint = localStorage.getItem("crudUrl");
     console.log("Constructor: crudUrl = ${this.endpoint}");
   }
 
-  // ngOnInit() {
-  //   this.endpoint = this.configService.config["crudUrl"] + "/es";
-  //   console.log("ngOnInit crudUrl = ${this.endpoint}");
-
-  // }
-
   public obtenerContexto(): Promise<GesContexto> {
-    return this.http.get(this.endpoint + '/metadatos/').pipe(map(m => {
-      const ctx = new GesContexto();
-      ctx.metadatos = m;
-      return ctx;
-    })).toPromise();
+    
+    const observableMetadatos: Observable<GesContexto> =
+     this.http.get(this.endpoint + '/metadatos/').pipe(
+        map(m => {
+              const ctx = new GesContexto();
+              ctx.metadatos = m;
+              return ctx;
+            })
+    );
+
+    const observableEstados: Observable<any> = this.http.get(this.endpoint + '/estados_consultas/');
+
+    const obZip: Observable<[GesContexto, Array<Consulta>]> = zip(observableMetadatos, observableEstados);
+           
+    const ob: Observable<GesContexto> = obZip.pipe(map(tupla => this.asignarEstados(tupla[0], tupla[1])));
+    
+    return ob.toPromise();
+  }
+
+  private asignarEstados(ctx: GesContexto, estados: Array<Consulta>): GesContexto {
+    estados.forEach(e => ctx.setCamposConsulta(e.idConsulta, e.campos));
+    return ctx;
   }
   
   public obtenerEntidad(consulta: Consulta, clave: string): Promise<any> {
@@ -137,4 +147,17 @@ export class GesService {
     return url;   
   }
 
+
+  /**
+   * Asigna e envía al backend los campos que se muestran en una consulta.
+   */
+  public setCamposConsulta(idConsulta: string, campos: Campo[]) {
+    this.contexto.setCamposConsulta(idConsulta, campos);
+
+    const url = this.endpoint + '/estados_consultas/' + idConsulta + "/campos";
+    return this.http.put<any>(url, campos, this.httpOptions).toPromise();
+  }
+
+
 }
+

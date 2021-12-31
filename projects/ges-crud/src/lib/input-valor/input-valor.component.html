@@ -1,12 +1,15 @@
 <div [ngSwitch]="tipo" class="input-group">
 
-  <input #inputTexto *ngSwitchCase="'texto'" type="textbox" class="form-control" [style.max-width]="ancho" (change)="onChangeInputTexto($event)">
+  <input #inputTexto *ngSwitchCase="'texto'" type="textbox" class="form-control" [attr.maxlength]="tamano" [style.max-width]="ancho" (change)="onChangeInputTexto($event)">
   <span *ngIf="tieneSeleccion" class="input-group-append">
       <button type="button" class="btn btn-outline-secondary" (click)="onSeleccion()">
         <span class="d-none">Seleccionar</span>
         <span class="fa fa-search"></span>
       </button>
   </span>
+  <div *ngIf="unidad" class="input-group-append">
+    <span class="input-group-text"> {{unidad}} </span>
+  </div>
 
   <select #inputSelect *ngSwitchCase="'seleccion'" class="form-control" [style.max-width]="ancho" (change)="onChangeInputSelect($event)">
     <option *ngFor="let opcion of opciones" [value]="opcion">{{opcion}}</option>

@@ -60,10 +60,10 @@ export class EditorCamposComponent implements OnInit {
     return this.servicioGes.contexto.esOculto(campo);
   }
 
-  public valorSeleccionado(campo: Campo, entidadRelacionada: any) {
+  public valorSeleccionado(campo: Campo, entidadSeleccionada: any) {
 
     if (campo.consultaSeleccion) {
-      this.procesarValoresRelacionados(campo, entidadRelacionada);
+      this.procesarValoresRelacionados(campo, entidadSeleccionada);
     }
   }
 
@@ -80,11 +80,11 @@ export class EditorCamposComponent implements OnInit {
     );
   }
 
-  public procesarValoresRelacionados(campo: Campo, valoresRelacionados: any) {
-    console.log(valoresRelacionados);
+  public procesarValoresRelacionados(campo: Campo, entidadSeleccionada: any) {
+    console.log(entidadSeleccionada);
     this.campos.forEach((otroCampo) => {
       if (otroCampo.idCampoRelacion === campo.idCampo) {
-        this.asignarValor(otroCampo.idCampo, valoresRelacionados[otroCampo.idCampoSeleccion]);
+        this.asignarValor(otroCampo.idCampo, entidadSeleccionada[otroCampo.idCampoSeleccion]);
       }
     });
   }
@@ -97,16 +97,19 @@ export class EditorCamposComponent implements OnInit {
     return this.formulario.invalid ? null : this.formulario.value;
   }
 
+  
   public entidadGuardada(valores: any) {
     if (!valores) {
       return;
     }
 
+    const entidad = this.servicioGes.contexto.aEntidadUsuario(this.consulta, valores);
+    
     this.campos.forEach((campo) => {
       const valor = valores[campo.idCampo];
-      if (valor !== undefined) {
-        this.asignarValor(campo.idCampo, valor);
-      }
+       if (valor !== undefined) {
+         this.asignarValor(campo.idCampo, valor);
+       }
     });
   }
 

@@ -129,6 +129,10 @@ export class GesContexto {
     return !(consulta.estilo & GesContexto.CONSULTA_SIN_MODIFICACION);
   }
 
+  public static tieneNombreFemenino(consulta: Consulta): boolean {
+    return (consulta.estilo & GesContexto.CONSULTA_NOMBRE_FEMENINO) !== 0;
+  }
+
   public static permitirFiltro(consulta: Consulta): boolean {
     return !(consulta.estilo & GesContexto.CONSULTA_SIN_FILTRO);
   }
@@ -168,9 +172,12 @@ export class GesContexto {
    */
   public aEntidadNegocio(consulta: Consulta, entidadUsuario: any): any {
     const entidadNegocio = {};
-    consulta.campos.forEach(campo => entidadNegocio[campo.idCampo] = this.aValorNegocio(campo, entidadUsuario[campo.idCampo]));
+    consulta.campos
+      .filter(campo => !this.esSoloLectura(campo))
+      .forEach(campo => entidadNegocio[campo.idCampo] = this.aValorNegocio(campo, entidadUsuario[campo.idCampo]));
     return entidadNegocio;
   }
+
 
   /**
    * Convierte un array de entidades de negocio a entidades de usuario.
@@ -182,7 +189,7 @@ export class GesContexto {
   /**
    * Convierte una entidad de negocio a entidades de usuario.
    */
-  public aEntidadUsuario(consulta: Consulta, entidadNegocio: any) {
+  public aEntidadUsuario(consulta: Consulta, entidadNegocio: any): object {
     const entidadUsuario = {};
     consulta.campos.forEach(campo => entidadUsuario[campo.idCampo] = this.aValorUsuario(campo, entidadNegocio[campo.idCampo]));
     return entidadUsuario;

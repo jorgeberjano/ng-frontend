@@ -71,10 +71,28 @@ export class ConsultaComponent implements OnInit, OnDestroy {
       .catch(err => this.reportarError(err));
   }
 
-  private asignarRespuesta(resp: any) {
-    this.datos = resp.entidadesUsuario;
+  private asignarRespuesta(resp: any): void {
+    this.datos = this.decorarDatos(resp.entidadesUsuario);    
     this.totalFilas = resp.totalFilas;
     this.esperando = false;
+  }
+
+  private decorarDatos(datos: any): any {
+    return datos.map(fila => this.decorarFila(fila));
+  }
+
+  private decorarFila(fila: any): any {
+    const filaDecorada: object = {};
+    this.consulta.campos.forEach(campo => filaDecorada[campo.idCampo] = this.decorarValor(campo, fila[campo.idCampo]));
+    return filaDecorada;
+  }
+
+  private decorarValor(campo: Campo, valor: string): any {
+    if (campo.unidad) {
+      return valor + " " + campo.unidad;
+    } else {
+      return valor;
+    }
   }
 
   public filaSeleccionada(fila: any): void {

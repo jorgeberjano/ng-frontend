@@ -18,7 +18,8 @@ export class AuthInterceptorService implements HttpInterceptor {
     if (token) {
       request = req.clone({
         setHeaders: {
-          authorization: `Bearer ${ token }`
+          'Authorization': `Bearer ${ token }`,
+          'X-Formato': 'ges-frontend'
         }
       });
     }

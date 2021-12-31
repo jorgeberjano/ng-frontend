@@ -10,8 +10,8 @@
     <!--<input class="form-control">-->
     <ges-input-valor [(ngModel)]="condicion.valor" [tipo]="getTipo()" [opciones]="getOpciones()" tamano="10"></ges-input-valor> 
     <div class="input-group-append">
-        <button class="form-control boton_borrar btn btn-outline-danger" type="button" (click)="onEliminar()">
-            <div class="fa fa-window-close"></div>
+        <button class="form-control boton_borrar btn btn-outline-danger" type="button" (click)="onEliminar()">            
+            <fa-icon [icon]="faWindowClose"></fa-icon>
         </button>
     </div>   
 </div>

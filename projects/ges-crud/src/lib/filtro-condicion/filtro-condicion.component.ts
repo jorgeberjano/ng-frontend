@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CondicionFiltro, Campo } from '../servicios/interfaces';
 import { GesService } from '../servicios/ges.service';
 import { NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
+import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'ges-filtro-condicion',
@@ -12,6 +13,8 @@ export class FiltroCondicionComponent implements OnInit {
 
   @Input() condicion: CondicionFiltro;
   @Output() eliminar: EventEmitter<CondicionFiltro> = new EventEmitter();
+
+  faWindowClose = faWindowClose;
 
   constructor(private servicioGes: GesService,
     private timepickerConfig: NgbTimepickerConfig) {

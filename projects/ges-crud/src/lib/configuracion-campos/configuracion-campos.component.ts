@@ -51,7 +51,8 @@ export class ConfiguracionCamposComponent implements OnInit {
 
   onAceptar() {
     console.log('Aceptar');
-    this.servicioGes.contexto.setCamposConsulta(this.idConsulta, this.camposSeleccionados);
+    this.servicioGes.setCamposConsulta(this.idConsulta, this.camposSeleccionados);
+    
     this.router.navigate(['/crud', this.idConsulta]);
   }
 

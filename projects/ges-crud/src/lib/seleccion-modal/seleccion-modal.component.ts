@@ -56,6 +56,10 @@ export class SeleccionModalComponent implements OnInit, OnChanges {
     this.cargarDatosConsulta();
   }
 
+  public onSinSeleccion(): void {
+    this.activeModal.close(null);
+  }
+
   public cargarDatosConsulta() {
     if (!this.estado) {
       return;

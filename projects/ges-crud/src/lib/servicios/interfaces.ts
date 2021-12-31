@@ -15,6 +15,8 @@ export interface Campo {
     estilo: number;
     formato: string;
     tamano: number;
+    unidad: string;
+    decimales: number;
     consultaSeleccion: string;
     idCampoRelacion: string;
     idCampoSeleccion: string;

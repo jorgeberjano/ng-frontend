@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { Filtro, CondicionFiltro, Campo, Consulta, EstadoConsulta } from '../servicios/interfaces';
 import { GesService } from '../servicios/ges.service';
+import { faTimes, faCheck, faPlus, faEraser } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -14,6 +15,11 @@ export class FiltroComponent implements OnInit {
   public filtro: Filtro;
   public campos: Array<Campo>;
   public consulta: Consulta;
+
+  faTimes = faTimes;
+  faCheck = faCheck;
+  faPlus = faPlus;
+  faEraser = faEraser;
 
   constructor(
     private route: ActivatedRoute,

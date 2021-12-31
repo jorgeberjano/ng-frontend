@@ -3,12 +3,12 @@
   <div class="row m-1">
     <button id="boton_limpiar" type="button" class="btn btn-warning m-1" (click)="onLimpiar()">
       Limpiar filtro
-      <div class="fa fa-eraser"></div>
+      <fa-icon [icon]="faEraser"></fa-icon>
     </button>
     <div ngbDropdown class="d-inline-block">
       <button ngbDropdownToggle id="boton_agregar" class="btn btn-primary m-1">
         Agregar condición
-        <div class="fa fa-plus"></div>
+        <fa-icon [icon]="faPlus"></fa-icon>
       </button>
       <div ngbDropdownMenu aria-labelledby="boton_agregar">
         <button ngbDropdownItem *ngFor="let campo of campos" (click)="onAgregarCondicion(campo)">{{campo.titulo}}</button>
@@ -25,11 +25,11 @@
   <div class="row justify-content-end m-1">
       <button id="boton_aceptar" type="button" class="btn btn-success m-1" (click)="onAceptar()">
           Aceptar
-          <div class="fa fa-check"></div>
+          <fa-icon [icon]="faCheck"></fa-icon>
       </button>            
       <button id="boton_cancelar" type="button" class="btn btn-danger m-1" (click)="onCancelar()">
           Cancelar
-          <div class="fa fa-times"></div>
+          <fa-icon [icon]="faTimes"></fa-icon>
       </button>
   </div>
 </div>

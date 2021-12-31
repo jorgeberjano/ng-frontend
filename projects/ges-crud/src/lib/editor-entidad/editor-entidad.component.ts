@@ -5,6 +5,7 @@ import { EditorCamposComponent } from '../editor-campos/editor-campos.component'
 import { Consulta } from '../servicios/interfaces';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmacionModalComponent } from '../confirmacion-modal/confirmacion-modal.component';
+import { GesContexto } from '../servicios/ges-contexto';
 
 @Component({
   selector: 'ges-editor-entidad',
@@ -115,7 +116,10 @@ export class EditorEntidadComponent implements OnInit, AfterViewInit {
   private borrarEntidad() {
     const modalRef = this.modalService.open(ConfirmacionModalComponent);
     modalRef.componentInstance.titulo = 'Confirmación de borrado';
-    modalRef.componentInstance.mensaje = 'Se va a borrar el ' + this.consulta.nombreEnSingular;
+    const femenino: boolean = GesContexto.tieneNombreFemenino(this.consulta);
+    modalRef.componentInstance.mensaje = 'Se va a borrar'
+      + (femenino ? ' la ' : ' el ')
+      + this.consulta.nombreEnSingular;
     modalRef.result.then(resultado => this.procesarConfirmacionBorrado(resultado));
   }
 
