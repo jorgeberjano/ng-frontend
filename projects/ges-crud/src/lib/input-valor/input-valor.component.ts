@@ -3,6 +3,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NgbDateParserFormatter, NgbTimepickerConfig, NgbInputDatepicker, NgbTimepicker } from '@ng-bootstrap/ng-bootstrap';
 import { CustomDateParserFormatter } from '../servicios/formato-fecha';
 import { NgbTime } from '@ng-bootstrap/ng-bootstrap/timepicker/ngb-time';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'ges-input-valor',
@@ -36,6 +37,8 @@ export class InputValorComponent implements OnInit, AfterViewInit, ControlValueA
   public fecha: any;
   public hora: any;
   private valorAlmacenado: any;
+
+  faSearch = faSearch;
 
   // Both onChange and onTouched are functions
   onChange: any = () => { };

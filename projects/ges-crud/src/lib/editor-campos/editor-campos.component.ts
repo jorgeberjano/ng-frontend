@@ -106,7 +106,7 @@ export class EditorCamposComponent implements OnInit {
     const entidad = this.servicioGes.contexto.aEntidadUsuario(this.consulta, valores);
     
     this.campos.forEach((campo) => {
-      const valor = valores[campo.idCampo];
+      const valor = entidad[campo.idCampo];
        if (valor !== undefined) {
          this.asignarValor(campo.idCampo, valor);
        }

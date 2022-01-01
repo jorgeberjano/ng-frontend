@@ -4,7 +4,7 @@
   <span *ngIf="tieneSeleccion" class="input-group-append">
       <button type="button" class="btn btn-outline-secondary" (click)="onSeleccion()">
         <span class="d-none">Seleccionar</span>
-        <span class="fa fa-search"></span>
+        <fa-icon [icon]="faSearch"></fa-icon>    
       </button>
   </span>
   <div *ngIf="unidad" class="input-group-append">
