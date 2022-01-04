@@ -1,0 +1,55 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Registro</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="registroForm">
+          <div class="form-group">
+            <label>Usuario</label>
+            <input type="text" formControlName="nombre" class="form-control" placeholder="Nombre"
+              [ngClass]="{ 'is-invalid': mostrarErrores && f.nombre.errors }" />
+  
+            <div *ngIf="mostrarErrores && f.nombre.errors" class="invalid-feedback">
+              <div *ngIf="f.nombre.errors.required">Email is required</div>
+              <div *ngIf="f.nombre.errors.email">Email must be a valid email address</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Contraseña</label>
+            <input type="password" formControlName="contrasena" class="form-control" placeholder="Contraseña"
+              [ngClass]="{ 'is-invalid': mostrarErrores && f.contrasena.errors }" />
+            <div *ngIf="mostrarErrores && f.contrasena.errors" class="invalid-feedback">
+              <div *ngIf="f.contrasena.errors.required">Password is required</div>
+              <div *ngIf="f.contrasena.errors.minlength">Password must be at least 6 characters</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Repetir contraseña</label>
+            <input type="password" formControlName="contrasena2" class="form-control" placeholder="Contraseña"
+              [ngClass]="{ 'is-invalid': mostrarErrores && f.contrasena2.errors }" />
+            <div *ngIf="mostrarErrores && f.contrasena2.errors" class="invalid-feedback">
+              <div *ngIf="f.contrasena2.errors.required">Password is required</div>
+              <div *ngIf="f.contrasena2.errors.minlength">Password must be at least 6 characters</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Empresa</label>
+            <select #inputSeleccionEmpresa class="form-control">
+                <option *ngFor="let empresa of empresas" [value]="empresa">{{empresa}}</option>
+              </select>s
+          </div>
+          <div class="form-group">
+            <label>Token de empresa</label>
+            <input type="password2" formControlName="token" class="form-control" placeholder="Token"
+              [ngClass]="{ 'is-invalid': mostrarErrores && f.token.errors }" />
+            <div *ngIf="mostrarErrores && f.token.errors" class="invalid-feedback">
+              <div *ngIf="f.contrasena2.errors.required">El token en obligatorio</div>
+            </div>
+          </div>          
+          <button type="submit" class="btn btn-primary" (click)="registrar()">Registrarse</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

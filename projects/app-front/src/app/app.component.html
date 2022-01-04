@@ -1,5 +1,6 @@
 
 <ges-login (loginCompletado)="loginRealizado($event)" *ngIf="estado === 'login'"></ges-login>
+<ges-registro (registroCompletado)="registroRealizado($event)" *ngIf="estado === 'registro'"></ges-registro>
 
 <div class="app__principal" *ngIf="estado === 'menu'">
   <div class="app__menu">

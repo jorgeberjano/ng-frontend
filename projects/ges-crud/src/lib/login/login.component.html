@@ -1,8 +1,36 @@
-<div class="login">
-  <form class="custom-form" method="post">
-    <h1>Login</h1>
-    <input [(ngModel)]="nombre" name="nombre" placeholder="Nombre" required="required" />
-    <input type="password" [(ngModel)]="contrasena" name="contrasena" placeholder="Contraseña" required="required" />
-    <button type="submit" (click)="login()">Log in</button>
-  </form>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title" id="myModalLabel">Login</h4>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="loginForm">
+        <div class="form-group">
+          <label>Usuario</label>
+          <input type="text" formControlName="nombre" class="form-control" placeholder="Nombre"
+            [ngClass]="{ 'is-invalid': mostrarErrores && f.nombre.errors }" />
+
+          <div *ngIf="mostrarErrores && f.nombre.errors" class="invalid-feedback">
+            <div *ngIf="f.nombre.errors.required">Email is required</div>
+            <div *ngIf="f.nombre.errors.email">Email must be a valid email address</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Contraseña</label>
+          <input type="password" formControlName="contrasena" class="form-control" placeholder="Contraseña"
+            [ngClass]="{ 'is-invalid': mostrarErrores && f.contrasena.errors }" />
+          <div *ngIf="mostrarErrores && f.contrasena.errors" class="invalid-feedback">
+            <div *ngIf="f.contrasena.errors.required">Password is required</div>
+            <div *ngIf="f.contrasena.errors.minlength">Password must be at least 6 characters</div>
+          </div>
+        </div>
+        <div class="form-group form-check">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" name="remember"> Recuerdame
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="login()">Login</button>
+      </form>
+    </div>
+  </div>
 </div>

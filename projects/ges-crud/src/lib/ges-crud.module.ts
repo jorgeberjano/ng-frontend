@@ -30,6 +30,7 @@ import { GesServiceModule } from './servicios/ges-service.module';
 import { ConfirmacionModalComponent } from './confirmacion-modal/confirmacion-modal.component';
 import { ConfigService } from './servicios/config.service';
 import { LoginComponent } from './login/login.component';
+import { RegistroComponent } from './registro/registro.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { LoginComponent } from './login/login.component';
     RejillaDatosComponent,
     SeleccionModalComponent,
     ConfirmacionModalComponent,
-    LoginComponent
+    LoginComponent,
+    RegistroComponent
   ],
   imports: [
     GesServiceModule.forRoot(),

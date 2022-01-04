@@ -29,7 +29,8 @@ export class AppComponent implements OnInit {
     if (!localStorage.getItem('token')) {
       this.estado = 'login';
     } else {
-      this.obtenerContexto();
+      this.estado = 'registro';
+      //this.obtenerContexto();
     }
   }
 
@@ -56,6 +57,10 @@ export class AppComponent implements OnInit {
     console.log('Se ha logado el usuario: ' + usuario);
     this.estado = 'esperando';
     this.obtenerContexto();
+  }
+
+  public registroRealizado(usuario: string) {
+    this.estado = 'login';
   }
 
   public reportarError(err: any): void {
